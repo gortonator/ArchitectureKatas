@@ -1,7 +1,5 @@
 package book.demo.java.service;
 
-import book.demo.java.model.Cart;
-import book.demo.java.model.Order;
 import book.demo.java.model.Reader;
 
 import java.util.List;
@@ -19,5 +17,4 @@ public interface ReaderService {
 
     void deleteReaderById(int readerId);
 
-    Cart getCartByReaderId(int readerId);
 }

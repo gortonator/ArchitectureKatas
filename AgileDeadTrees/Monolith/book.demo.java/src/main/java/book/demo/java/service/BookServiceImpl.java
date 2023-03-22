@@ -4,12 +4,12 @@ import book.demo.java.exception.BookNotFoundException;
 import book.demo.java.model.Book;
 import book.demo.java.repository.BookRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,15 +18,12 @@ import java.util.Map;
 @Service
 public class BookServiceImpl implements BookService{
 
-    private final BookRepository bookRepository;
-
-    public BookServiceImpl(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    @Autowired
+    private BookRepository bookRepository;
 
     @Override
     public List<Book> getAllBooks() {
-        return new ArrayList<Book>(bookRepository.findAll());
+        return bookRepository.findAll();
     }
 
     @Override
@@ -45,7 +42,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public Integer createBook(Book book) {
-        return bookRepository.save(book).getBookId();
+        return bookRepository.save(book).getId();
     }
 
     @Override
@@ -56,7 +53,7 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public List<Book> getBooksByAuthor(String author) {
-        return new ArrayList<Book>(bookRepository.findByAuthor(author));
+        return bookRepository.findByAuthor(author);
     }
 
     @Override

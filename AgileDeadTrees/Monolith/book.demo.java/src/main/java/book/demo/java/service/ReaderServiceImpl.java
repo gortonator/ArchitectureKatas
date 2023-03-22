@@ -1,11 +1,10 @@
 package book.demo.java.service;
 
 import book.demo.java.exception.ReaderNotFoundException;
-import book.demo.java.model.Cart;
-import book.demo.java.model.Order;
 import book.demo.java.model.Reader;
 import book.demo.java.repository.ReaderRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,15 +16,12 @@ import java.util.*;
 @Service
 public class ReaderServiceImpl implements ReaderService {
 
-    private final ReaderRepository readerRepository;
-
-    public ReaderServiceImpl(ReaderRepository readerRepository) {
-        this.readerRepository = readerRepository;
-    }
+    @Autowired
+    private ReaderRepository readerRepository;
 
     @Override
     public List<Reader> getAllReaders() {
-        return new ArrayList<Reader>(readerRepository.findAll());
+        return readerRepository.findAll();
     }
 
     @Override
@@ -44,7 +40,7 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public Integer createReader(Reader reader) {
-        return readerRepository.save(reader).getReaderId();
+        return readerRepository.save(reader).getId();
     }
 
     @Override
@@ -58,13 +54,7 @@ public class ReaderServiceImpl implements ReaderService {
         readerRepository.deleteById(readerId);
     }
 
-    // attention: in which route?
-    @Override
-    public Cart getCartByReaderId(int readerId) {
-        Reader reader = readerRepository.findById(readerId)
-                .orElseThrow(() -> new ReaderNotFoundException("Reader id " + readerId + " NOT FOUND."));
-        return reader.getCart();
-    }
+
 
 
 }

@@ -5,6 +5,7 @@ import book.demo.java.model.Book;
 import book.demo.java.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +13,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/books")
 public class BookController {
 
-    private final BookService bookService;
-
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
+    @Autowired
+    private BookService bookService;
 
     @Operation(summary = "Get all books.")
     @GetMapping
@@ -91,7 +89,7 @@ public class BookController {
             List<Book> booksByAuthor = bookService.getBooksByAuthor(author);
 
             if (booksByAuthor.isEmpty()) {
-                return new ResponseEntity<>(booksByAuthor, HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(booksByAuthor, HttpStatus.OK);
         } catch (Exception e) {
