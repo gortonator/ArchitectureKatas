@@ -1,7 +1,6 @@
 package book.demo.java.controller;
 
 import book.demo.java.exception.ExceptionUtil;
-import book.demo.java.model.Order;
 import book.demo.java.model.Reader;
 import book.demo.java.service.ReaderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,8 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/reader")
+@RequestMapping("/api/reader")
 public class ReaderController {
 
     private final ReaderService readerService;
@@ -47,7 +47,7 @@ public class ReaderController {
     ) {
         try {
             Map<String, Object> response = readerService.getReadersWithPaging(page, size);
-            // attention
+            // to be revised
 //            if (readers.isEmpty()) {
 //                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 //            }
@@ -59,7 +59,7 @@ public class ReaderController {
         }
     }
 
-    //attention
+    //to be revised
 //    @Operation(summary = "Get orders by reader id.")
 //    @GetMapping("/{readerId}/orders")
 //    public ResponseEntity<List<Order>> getOrdersByReaderId(@PathVariable readerId) {
@@ -97,7 +97,7 @@ public class ReaderController {
     public ResponseEntity<HttpStatus> deleteReaderById(@PathVariable int readerId) {
         try {
             readerService.deleteReaderById(readerId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null,
                     ExceptionUtil.getHeaderForException(e.getMessage()),

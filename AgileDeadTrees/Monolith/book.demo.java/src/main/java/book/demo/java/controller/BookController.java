@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/api/books")
 public class BookController {
 
     @Autowired
@@ -44,7 +45,7 @@ public class BookController {
     ) {
         try {
             Map<String, Object> response = bookService.getBooksWithPaging(page, size);
-// attention
+            // to be revised
 //            if (books.isEmpty()) {
 //                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 //            }
@@ -104,7 +105,7 @@ public class BookController {
     public ResponseEntity<HttpStatus> deleteBookById(@PathVariable int bookId) {
         try {
             bookService.deleteBookById(bookId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null,
                     ExceptionUtil.getHeaderForException(e.getMessage()),

@@ -1,20 +1,19 @@
 package book.demo.java.service;
 
-import book.demo.java.model.Book;
 import book.demo.java.model.CartItem;
-import book.demo.java.model.Reader;
 
 import java.util.List;
 
 public interface CartItemService {
 
-    List<CartItem> getCartItems(Reader reader);
+//    List<CartItem> getCartItems(Reader reader);
 
     List<CartItem> getCartItemsByReaderId(int readerId);
 
-    CartItem addCartItem(Book book, int quantity, Reader reader);
+//    CartItem addCartItem(Book book, int quantity, Reader reader);
+    CartItem addCartItem(int bookId, int quantity, int readerId);
 
-    void removeCartItem(Book book, Reader reader);
+    void removeByReaderIdAndBookId(int readerId, int bookId);
 
-    void clearCartItemByReader(Reader reader);
+    void clearCartItemByReaderId(int readerId);
 }
