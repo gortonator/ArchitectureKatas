@@ -2,6 +2,7 @@ package book.demo.java.controller;
 
 import book.demo.java.exception.ExceptionUtil;
 import book.demo.java.model.Order;
+import book.demo.java.service.CartItemService;
 import book.demo.java.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private CartItemService cartService;
 
     @Operation(summary = "Get all the orders of a Reader.")
     @GetMapping
@@ -55,6 +59,7 @@ public class OrderController {
     ) {
         try {
             Order createdOrder = orderService.createOrder(readerId);
+            cartService.clearCartItemByReaderId(readerId);
             return new ResponseEntity<>(createdOrder, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null,
