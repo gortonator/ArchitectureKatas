@@ -1,19 +1,19 @@
 package book.demo.java.service;
 
-import book.demo.java.model.Reader;
+import book.demo.java.entity.account.external.Reader;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ReaderService {
 
     List<Reader> getAllReaders();
 
-    Map<String, Object> getReadersWithPaging(int page, int size);
-
-    Integer createReader(Reader reader);
+    Page<Reader> getReadersWithPaging(int page, int size);
 
     Reader getReaderById(int readerId);
+
+    Reader findReaderByUsername(String username);
 
     void deleteReaderById(int readerId);
 

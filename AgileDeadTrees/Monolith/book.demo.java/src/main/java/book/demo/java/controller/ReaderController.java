@@ -1,108 +1,64 @@
 package book.demo.java.controller;
 
-import book.demo.java.exception.ExceptionUtil;
-import book.demo.java.model.Reader;
+import book.demo.java.entity.account.external.Reader;
 import book.demo.java.service.ReaderService;
+import book.demo.java.util.PredefinedRole;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.Valid;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
-@RequestMapping("/api/reader")
+@RequestMapping("/api/readers")
 public class ReaderController {
 
-    private final ReaderService readerService;
+    @Autowired
+    private ReaderService readerService;
 
-    public ReaderController(ReaderService readerService) {
-        this.readerService = readerService;
-    }
 
     @Operation(summary = "Get all readers.")
-    @GetMapping
+    @GetMapping("/all")
+    @RequiresRoles(PredefinedRole.ADMIN_ROLE)
     public ResponseEntity<List<Reader>> getAllReaders() {
-        try {
-            List<Reader> readers =  readerService.getAllReaders();
+        List<Reader> readers = readerService.getAllReaders();
 
-            if (readers.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(readers, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null,
-                    ExceptionUtil.getHeaderForException(e.getMessage()),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+        if (readers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(readers, HttpStatus.OK);
     }
 
     @Operation(summary = "Get all readers with pagination.")
-    @GetMapping("/page")
-    public ResponseEntity<Map<String, Object>> getReadersWithPaging(
+    @GetMapping
+    public ResponseEntity<Page<Reader>> getReadersWithPaging(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size
     ) {
-        try {
-            Map<String, Object> response = readerService.getReadersWithPaging(page, size);
-            // to be revised
-//            if (readers.isEmpty()) {
-//                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-//            }
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null,
-                    ExceptionUtil.getHeaderForException(e.getMessage()),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+        Page<Reader> pageReaders = readerService.getReadersWithPaging(page, size);
+        if (!pageReaders.hasContent()) {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
-    }
-
-    //to be revised
-//    @Operation(summary = "Get orders by reader id.")
-//    @GetMapping("/{readerId}/orders")
-//    public ResponseEntity<List<Order>> getOrdersByReaderId(@PathVariable readerId) {
-//
-//    }
-
-    @Operation(summary = "Create a new reader.")
-    @PostMapping
-    public ResponseEntity<Integer> createReader(@Valid @RequestBody Reader reader) {
-        try {
-            Integer readerId = readerService.createReader(reader);
-            return new ResponseEntity<>(readerId, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null,
-                    ExceptionUtil.getHeaderForException(e.getMessage()),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>(pageReaders, HttpStatus.OK);
     }
 
     @Operation(summary = "Get a reader by reader id.")
     @GetMapping("/{readerId}")
     public ResponseEntity<Reader> getReaderById(@PathVariable int readerId) {
-        try {
-            Reader reader = readerService.getReaderById(readerId);
-            return new ResponseEntity<>(reader, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null,
-                    ExceptionUtil.getHeaderForException(e.getMessage()),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        Reader reader = readerService.getReaderById(readerId);
+        return new ResponseEntity<>(reader, HttpStatus.OK);
     }
 
     @Operation(summary = "Delete a reader by reader id.")
     @DeleteMapping("/{readerId}")
     public ResponseEntity<HttpStatus> deleteReaderById(@PathVariable int readerId) {
-        try {
-            readerService.deleteReaderById(readerId);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null,
-                    ExceptionUtil.getHeaderForException(e.getMessage()),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        readerService.deleteReaderById(readerId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

@@ -1,58 +1,102 @@
-//package book.demo.java.exception;
-//
-//import org.springframework.http.HttpHeaders;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.HttpStatusCode;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.validation.FieldError;
-//import org.springframework.web.bind.MethodArgumentNotValidException;
-//import org.springframework.web.bind.annotation.ControllerAdvice;
-//import org.springframework.web.bind.annotation.ExceptionHandler;
-//import org.springframework.web.context.request.WebRequest;
-//import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-//
-//import java.time.LocalDateTime;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//import java.util.Objects;
-//
-//@ControllerAdvice
-//public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
-//
-//    @ExceptionHandler(Exception.class)
-//    public final ResponseEntity<ErrorDetails> handleAllExceptions(Exception ex, WebRequest request) throws Exception {
-//
-//        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
-//                ex.getMessage(), request.getDescription(false));
-//
-//        return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-//
-//    @ExceptionHandler(ReaderNotFoundException.class)
-//    public final ResponseEntity<ErrorDetails> handleReaderNotFoundExceptions(Exception ex, WebRequest request) throws Exception {
-//
-//        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
-//                ex.getMessage(), request.getDescription(false));
-//
-//        return new ResponseEntity<ErrorDetails>(errorDetails, HttpStatus.NOT_FOUND);
-//    }
-//
-//    @Override
-//    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-//            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-//
-////        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
-////        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(),
-////                "Total Errors:" + ex.getErrorCount() + " First Error:" + Objects.requireNonNull(ex.getFieldError()).getDefaultMessage(), request.getDescription(false));
-//
-//        List<FieldError> fieldErrorList = ex.getFieldErrors();
-//        Map<String, Object> errMap = new HashMap<>();
-//        for (FieldError err: fieldErrorList) {
-//            errMap.put(err.getField(), err.getDefaultMessage());
-//        }
-//        ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), errMap.toString(), request.getDescription(false));
-//        return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
-//
-//    }
-//}
+package book.demo.java.exception;
+
+import org.apache.shiro.authc.AccountException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authz.UnauthenticatedException;
+import org.apache.shiro.authz.UnauthorizedException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+
+@RestControllerAdvice
+public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<ErrorDetails> handleAllExceptions(Exception ex, WebRequest request) {
+
+        return new ResponseEntity<>(
+                new ErrorDetails(
+                        ex.getClass().getName(),
+                        ex.getMessage(),
+                        request.getDescription(false),
+                        Arrays.toString(ex.getStackTrace())),
+                HttpStatus.INTERNAL_SERVER_ERROR
+        );
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public final ResponseEntity<ErrorDetails> handleNoSuchElementExceptions(NoSuchElementException ex,
+                                                                            WebRequest request) {
+        return new ResponseEntity<>(
+                new ErrorDetails(
+                        ex.getClass().getName(),
+                        ex.getMessage(),
+                        request.getDescription(false),
+                        Arrays.toString(ex.getStackTrace())),
+                HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UnauthenticatedException.class)
+    public final ResponseEntity<ErrorDetails> handleUnauthenticatedExceptions(UnauthenticatedException ex,
+                                                                              WebRequest request) {
+        return new ResponseEntity<>(
+                new ErrorDetails(
+                        ex.getClass().getName(),
+                        ex.getMessage(),
+                        request.getDescription(false),
+                        Arrays.toString(ex.getStackTrace())),
+                HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public final ResponseEntity<ErrorDetails> handleUnauthorizedExceptions(UnauthorizedException ex,
+                                                                           WebRequest request) {
+        return new ResponseEntity<>(
+                new ErrorDetails(
+                        ex.getClass().getName(),
+                        ex.getMessage(),
+                        request.getDescription(false),
+                        Arrays.toString(ex.getStackTrace())),
+                HttpStatus.FORBIDDEN);
+    }
+
+    /*
+        Shiro Credential Exceptions
+     */
+    @ExceptionHandler(UnknownAccountException.class)
+    public final ResponseEntity<String> handleUnknownAccountExceptions(UnknownAccountException ex,
+                                                                       WebRequest request) {
+        String response = "Username not found.";
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(IncorrectCredentialsException.class)
+    public final ResponseEntity<String> handleIncorrectCredentialsExceptions(IncorrectCredentialsException ex,
+                                                                             WebRequest request) {
+        String response = "Incorrect password.";
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(AccountException.class)
+    public final ResponseEntity<ErrorDetails> handleAccountExceptionExceptions(AccountException ex,
+                                                                               WebRequest request) {
+        String response = "Other Account Exception.";
+        return new ResponseEntity<>(
+                new ErrorDetails(
+                        ex.getClass().getName(),
+                        response,
+                        ex.getMessage(),
+                        request.getDescription(false),
+                        Arrays.toString(ex.getStackTrace())),
+                HttpStatus.UNAUTHORIZED);
+    }
+
+}
+
