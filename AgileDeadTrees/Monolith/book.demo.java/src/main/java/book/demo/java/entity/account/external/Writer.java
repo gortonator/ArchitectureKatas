@@ -1,6 +1,7 @@
 package book.demo.java.entity.account.external;
 
 import book.demo.java.entity.book.Author;
+import book.demo.java.util.PredefinedRole;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
@@ -31,7 +32,7 @@ public class Writer extends AbsExternalUser implements Serializable {
 
     @Override
     public String getRole() {
-        return "writer";
+        return PredefinedRole.WRITER_ROLE;
     }
 
     @Override

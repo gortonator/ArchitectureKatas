@@ -9,6 +9,7 @@ package book.demo.java.entity.account.external;
 
 import book.demo.java.entity.account.Address;
 import book.demo.java.entity.order.Order;
+import book.demo.java.util.PredefinedRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
@@ -62,7 +63,7 @@ public class Reader extends AbsExternalUser implements Serializable {
 
     @Override
     public String getRole() {
-        return "reader";
+        return PredefinedRole.READER_ROLE;
     }
 
     @Override
