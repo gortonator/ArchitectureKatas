@@ -4,7 +4,9 @@ import book.demo.java.entity.book.Author;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "accepted_chapters", uniqueConstraints = {
@@ -13,6 +15,8 @@ import java.io.Serializable;
 @Data
 public class AcceptedChapter extends AbsChapter implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 4267070392362955713L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "accepted_chapter_id")
@@ -26,14 +30,15 @@ public class AcceptedChapter extends AbsChapter implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((AcceptedChapter) obj).getId();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AcceptedChapter that)) return false;
+        if (!super.equals(o)) return false;
+        return getId() == that.getId();
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getId());
+    }
 }

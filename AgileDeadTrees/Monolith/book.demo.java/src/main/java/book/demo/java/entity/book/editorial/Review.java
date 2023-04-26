@@ -8,15 +8,20 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "reviews")
 @Data
 public class Review implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -5335781463397071664L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,5 +62,17 @@ public class Review implements Serializable {
         this.draftChapter = draftChapter;
         this.editor = editor;
         this.content = content;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Review review)) return false;
+        return getId() == review.getId() && Objects.equals(getContent(), review.getContent());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getContent());
     }
 }

@@ -10,7 +10,6 @@ import book.demo.java.entity.order.OrderTrack;
 import book.demo.java.repository.CartItemRepository;
 import book.demo.java.repository.OrderRepository;
 import book.demo.java.repository.OrderTrackRepository;
-import book.demo.java.repository.ReaderRepository;
 import book.demo.java.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,9 +28,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private CartItemRepository cartRepo;
-
-    @Autowired
-    private ReaderRepository readerRepo;
 
     @Autowired
     private OrderTrackRepository orderTrackRepo;

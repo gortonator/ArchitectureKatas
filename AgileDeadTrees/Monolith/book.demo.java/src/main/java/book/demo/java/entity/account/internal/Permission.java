@@ -4,14 +4,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "permissions")
 @Data
 public class Permission implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -3576648057675469269L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,7 +54,7 @@ public class Permission implements Serializable {
 
     @Override
     public int hashCode() {
-        return 2021;
+        return Objects.hash(getId(), getName(), getDescription());
     }
 
     @Override

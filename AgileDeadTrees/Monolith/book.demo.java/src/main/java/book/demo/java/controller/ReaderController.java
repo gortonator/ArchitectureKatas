@@ -21,7 +21,6 @@ public class ReaderController {
     @Autowired
     private ReaderService readerService;
 
-
     @Operation(summary = "Get all readers.")
     @GetMapping("/all")
     @RequiresRoles(PredefinedRole.ADMIN_ROLE)

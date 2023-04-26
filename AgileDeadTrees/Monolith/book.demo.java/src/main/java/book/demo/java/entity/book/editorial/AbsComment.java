@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import java.io.InvalidObjectException;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @MappedSuperclass
 @Data
@@ -47,7 +48,14 @@ public abstract class AbsComment {
     public abstract Writer getWriter() throws InvalidObjectException;
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbsComment that)) return false;
+        return getContent().equals(that.getContent()) && getTimestamp().equals(that.getTimestamp());
+    }
+
+    @Override
     public int hashCode() {
-        return 2021;
+        return Objects.hash(getContent(), getTimestamp());
     }
 }

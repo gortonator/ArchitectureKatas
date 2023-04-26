@@ -5,12 +5,17 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_tracks")
 @Data
-public class OrderTrack {
+public class OrderTrack implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 9153795308821072167L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_track_id")

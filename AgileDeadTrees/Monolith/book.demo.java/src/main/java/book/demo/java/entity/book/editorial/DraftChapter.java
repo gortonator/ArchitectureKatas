@@ -5,12 +5,17 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "draft_chapters")
 @Data
 public class DraftChapter extends AbsChapter implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -3528350367957028315L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,13 +41,15 @@ public class DraftChapter extends AbsChapter implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof DraftChapter that)) return false;
+        if (!super.equals(o)) return false;
+        return getId() == that.getId();
+    }
 
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((DraftChapter) obj).getId();
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getId());
     }
 }

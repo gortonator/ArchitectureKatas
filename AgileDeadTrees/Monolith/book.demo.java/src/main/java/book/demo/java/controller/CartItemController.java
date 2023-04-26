@@ -71,7 +71,7 @@ public class CartItemController {
      * if the item already existed in cart.
      *
      * @param bookVariantId the id of the BookVariant object to be added.
-     * @param quantity the quantity of the BookVariant object to be added.
+     * @param quantity      the quantity of the BookVariant object to be added.
      * @return A ResponseEntity containing a CartItem objects and an HTTP status code.
      */
     @Operation(summary = "Reader adds book to cart.")

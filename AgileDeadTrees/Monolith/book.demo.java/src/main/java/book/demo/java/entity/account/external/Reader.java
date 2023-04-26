@@ -16,14 +16,19 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "readers")
 @Data
 public class Reader extends AbsExternalUser implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -7114988145643846309L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,13 +72,16 @@ public class Reader extends AbsExternalUser implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Reader reader)) return false;
+        if (!super.equals(o)) return false;
+        return getId() == reader.getId() && Objects.equals(getFirstName(), reader.getFirstName())
+                && Objects.equals(getLastName(), reader.getLastName());
+    }
 
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((Reader) obj).getId();
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getId(), getFirstName(), getLastName());
     }
 }

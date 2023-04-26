@@ -9,15 +9,20 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "published_books")
 @Data
 public class PublishedBook extends AbstractBook implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 3468877967393125144L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "published_book_id")
@@ -50,14 +55,16 @@ public class PublishedBook extends AbstractBook implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PublishedBook that)) return false;
+        if (!super.equals(o)) return false;
+        return getId() == that.getId();
+    }
 
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((PublishedBook) obj).getId();
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getId());
     }
 
     @Override

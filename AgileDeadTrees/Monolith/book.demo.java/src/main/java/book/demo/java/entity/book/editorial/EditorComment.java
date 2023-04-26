@@ -8,12 +8,17 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.InvalidObjectException;
+import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "editor_comments")
 @Data
 public class EditorComment extends AbsComment implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -8301690689867432966L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,14 +60,15 @@ public class EditorComment extends AbsComment implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((EditorComment) obj).getId();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EditorComment that)) return false;
+        if (!super.equals(o)) return false;
+        return getId() == that.getId();
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getId());
+    }
 }

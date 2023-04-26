@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @MappedSuperclass
 @Data
@@ -48,9 +49,14 @@ public abstract class AbsChapter {
     }
 
     @Override
-    public int hashCode() {
-        return 2021;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbsChapter that)) return false;
+        return getChapterIndex().equals(that.getChapterIndex()) && getTitle().equals(that.getTitle()) && getContent().equals(that.getContent());
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(getChapterIndex(), getTitle(), getContent());
+    }
 }

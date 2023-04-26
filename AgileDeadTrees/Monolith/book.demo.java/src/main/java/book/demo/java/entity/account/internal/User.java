@@ -5,14 +5,19 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
 @Data
 public class User implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -444404252404234799L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,7 +104,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return 2021;
+        return Objects.hash(getId(), getUsername(), getPassword(), getEmail(), getFirstName(), getLastName());
     }
 
     @Override

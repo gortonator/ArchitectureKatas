@@ -7,6 +7,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @MappedSuperclass
 @Data
@@ -30,7 +31,14 @@ public abstract class AbstractBook {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractBook that)) return false;
+        return getTitle().equals(that.getTitle()) && getGenre() == that.getGenre();
+    }
+
+    @Override
     public int hashCode() {
-        return 2021;
+        return Objects.hash(getTitle(), getGenre());
     }
 }

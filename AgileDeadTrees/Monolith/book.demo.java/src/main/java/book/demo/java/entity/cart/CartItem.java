@@ -8,6 +8,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -15,6 +16,9 @@ import java.math.BigDecimal;
 @Table(name = "cart_items")
 @Data
 public class CartItem implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -913266209945776105L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

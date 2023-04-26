@@ -42,9 +42,6 @@ public class EditorialServiceImpl implements EditorialService {
     private UserRepository userRepo;
 
     @Autowired
-    private AuthorRepository authorRepo;
-
-    @Autowired
     private WriterRepository writerRepo;
 
     @Autowired

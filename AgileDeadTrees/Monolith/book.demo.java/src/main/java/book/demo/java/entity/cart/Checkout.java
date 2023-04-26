@@ -68,7 +68,7 @@ public class Checkout {
 
     private BigDecimal calculateGrandTotal() {
         if ((subtotal != null) && (shippingFee != null)) return subtotal.add(shippingFee);
-        return subtotal == null? null : subtotal;
+        return subtotal == null ? null : subtotal;
     }
 
     private int calculateNumOfItems() {

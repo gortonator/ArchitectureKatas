@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Positive;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,6 +15,9 @@ import java.time.LocalDate;
 @Table(name = "book_variants")
 @Data
 public class BookVariant implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -205857131052908095L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

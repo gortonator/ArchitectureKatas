@@ -6,12 +6,17 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "writers")
 @Data
 public class Writer extends AbsExternalUser implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -3256079418226402989L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "writer_id")
@@ -36,13 +41,15 @@ public class Writer extends AbsExternalUser implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Writer writer)) return false;
+        if (!super.equals(o)) return false;
+        return getId() == writer.getId();
+    }
 
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((Writer) obj).getId();
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getId());
     }
 }

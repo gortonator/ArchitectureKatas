@@ -6,14 +6,20 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "authors")
 @Data
-public class Author {
+public class Author implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 844048742979303914L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -102,19 +108,16 @@ public class Author {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((Author) obj).getId();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Author author)) return false;
+        return getId() == author.getId() && Objects.equals(getFirstName(), author.getFirstName())
+                && Objects.equals(getLastName(), author.getLastName());
     }
 
     @Override
     public int hashCode() {
-        return 2021;
+        return Objects.hash(getId(), getFirstName(), getLastName());
     }
 
     @Override

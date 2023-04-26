@@ -5,12 +5,17 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "addresses")
 @Data
 public class Address implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 5914372821611983921L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,5 +65,22 @@ public class Address implements Serializable {
         this.state = state;
         this.postalCode = postalCode;
         this.reader = reader;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address address)) return false;
+        return getId() == address.getId() && getFirstName().equals(address.getFirstName())
+                && getLastName().equals(address.getLastName()) && getPhoneNumber().equals(address.getPhoneNumber())
+                && getAddressLine1().equals(address.getAddressLine1())
+                && Objects.equals(getAddressLine2(), address.getAddressLine2()) && getCity().equals(address.getCity())
+                && getState().equals(address.getState()) && getPostalCode().equals(address.getPostalCode());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getPhoneNumber(), getAddressLine1(),
+                getAddressLine2(), getCity(), getState(), getPostalCode());
     }
 }

@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @MappedSuperclass
 @Data
@@ -37,10 +38,18 @@ public abstract class AbsExternalUser {
         this.email = email;
     }
 
+    public abstract String getRole();
+
     @Override
-    public int hashCode() {
-        return 2021;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbsExternalUser that)) return false;
+        return getUsername().equals(that.getUsername())
+                && getPassword().equals(that.getPassword());
     }
 
-    public abstract String getRole();
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUsername(), getPassword());
+    }
 }

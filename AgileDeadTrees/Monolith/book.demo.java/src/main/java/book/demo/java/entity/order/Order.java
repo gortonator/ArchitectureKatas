@@ -11,6 +11,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,6 +23,9 @@ import java.util.List;
 @Table(name = "orders")
 @Data
 public class Order implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -4074703792569304048L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")

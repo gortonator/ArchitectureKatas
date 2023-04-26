@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -12,6 +13,9 @@ import java.math.BigDecimal;
 @Table(name = "order_details")
 @Data
 public class OrderDetail implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -1004385365835343408L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
