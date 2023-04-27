@@ -1,3 +1,10 @@
+/**
+ * This class represents a Review made by an editor for a draft chapter submitted by a Writer. Each draft chapter could
+ * have one Review. Each Review could have multiple EditorComment and WriterComment to be associated with.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.book.editorial;
 
 import book.demo.java.entity.account.internal.User;

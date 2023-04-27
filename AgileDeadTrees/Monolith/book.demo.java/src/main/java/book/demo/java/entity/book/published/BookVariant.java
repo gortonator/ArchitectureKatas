@@ -1,3 +1,10 @@
+/**
+ * This entity class represents a book variant stem from a published book entity. It is mainly used to
+ * distinguish what book format the variant is in and its corresponding price for readers to place an order.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.book.published;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;

@@ -1,5 +1,11 @@
-package book.demo.java.entity.cart;
+/**
+ * This is the CartItem entity that represents the cart items picked by a Reader. A list of CartItems
+ * could be used to generate checkout information.
+ *
+ * @author Tong
+ */
 
+package book.demo.java.entity.cart;
 
 import book.demo.java.entity.account.external.Reader;
 import book.demo.java.entity.book.published.BookVariant;

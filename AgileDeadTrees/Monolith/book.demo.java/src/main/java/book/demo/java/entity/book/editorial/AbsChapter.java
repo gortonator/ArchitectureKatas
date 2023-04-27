@@ -1,3 +1,10 @@
+/**
+ * This is the abstract that represents a chapter, with properties of chapter index, title, content, etc. It has
+ * ManyToOne associations with both DraftBook entity and Author entity.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.book.editorial;
 
 import book.demo.java.entity.book.Author;
@@ -52,7 +59,8 @@ public abstract class AbsChapter {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof AbsChapter that)) return false;
-        return getChapterIndex().equals(that.getChapterIndex()) && getTitle().equals(that.getTitle()) && getContent().equals(that.getContent());
+        return getChapterIndex().equals(that.getChapterIndex()) && getTitle().equals(that.getTitle())
+                && getContent().equals(that.getContent());
     }
 
     @Override

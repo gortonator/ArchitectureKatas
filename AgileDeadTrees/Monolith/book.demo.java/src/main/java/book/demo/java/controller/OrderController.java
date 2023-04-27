@@ -1,3 +1,17 @@
+/**
+ * This is a controller class for handling HTTP requests related to Order manipulation.
+ * <p>
+ * Endpoints:
+ * GET /api/orders: Get all the orders of a Reader.
+ * PUT /api/orders/{orderId}/status: Manager sets an order status by Order id.
+ * POST /api/orders/{orderId}/tracks: Manager creates order tracks by Order id.
+ * GET /api/orders/{orderId}: Get an order by Order id.
+ * DELETE /api/orders、remove/{orderId}: Delete an order by id.
+ *
+ * @author: Tong
+ * @see PredefinedRole
+ */
+
 package book.demo.java.controller;
 
 import book.demo.java.entity.order.Order;

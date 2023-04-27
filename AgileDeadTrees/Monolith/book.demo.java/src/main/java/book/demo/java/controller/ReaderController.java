@@ -1,3 +1,16 @@
+/**
+ * This is a controller class handling HTTP requests related to Reader entity manipulation.
+ * <p>
+ * Endpoints:
+ * GET /api/readers/all: Get all readers.
+ * GET /api/readers: Get all readers with pagination.
+ * GET /api/readers/{readerId}: Get a reader by reader id.
+ * DELETE /api/readers/{readerId}: Delete a reader by reader id.
+ *
+ * @author Tong
+ * @see RequiresRoles
+ */
+
 package book.demo.java.controller;
 
 import book.demo.java.entity.account.external.Reader;

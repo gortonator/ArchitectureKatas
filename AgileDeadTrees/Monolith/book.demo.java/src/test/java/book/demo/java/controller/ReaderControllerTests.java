@@ -24,17 +24,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(ReaderController.class)
 public class ReaderControllerTests {
 
+    private final String baseUrl = "/api/readers";
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ObjectMapper objectMapper;
-
     @MockBean
     private ReaderService readerService;
-
-    private final String baseUrl = "/api/readers";
-
     private Reader reader1;
     private List<Reader> readers;
 

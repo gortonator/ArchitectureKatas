@@ -1,3 +1,10 @@
+/**
+ * This is the User entity class, representing an internal user of the system. Users would be assigned with Roles to
+ * gain permissions of accessing different endpoints.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.account.internal;
 
 import lombok.Data;
@@ -92,14 +99,11 @@ public class User implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((User) obj).getId();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User user)) return false;
+        return getId() == user.getId() && getUsername().equals(user.getUsername())
+                && getPassword().equals(user.getPassword()) && getEmail().equals(user.getEmail());
     }
 
     @Override

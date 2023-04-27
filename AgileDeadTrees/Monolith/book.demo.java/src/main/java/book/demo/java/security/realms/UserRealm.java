@@ -31,24 +31,25 @@ public class UserRealm extends AuthorizingRealm {
 
         User user = userService.findByUsername(username);
 
-        Set<String> stringPerms = new HashSet<>();
+        Set<String> permsInString = new HashSet<>();
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 
         for (Role role : user.getRoles()) {
             info.addRole(role.getName());
             for (Permission permission : role.getPermissions()) {
-                stringPerms.add(permission.getName());
+                permsInString.add(permission.getName());
             }
         }
 
-        info.addStringPermissions(stringPerms);
+        info.addStringPermissions(permsInString);
         return info;
     }
 
 
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
+            throws AuthenticationException {
 
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String tokenUsername = token.getUsername();
@@ -59,7 +60,8 @@ public class UserRealm extends AuthorizingRealm {
         }
 
         String password = user.getPassword();
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(tokenUsername, password, getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
+                tokenUsername, password, getName());
         simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(tokenUsername));
         return simpleAuthenticationInfo;
     }

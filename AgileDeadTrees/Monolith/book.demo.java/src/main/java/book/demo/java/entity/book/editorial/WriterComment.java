@@ -1,3 +1,10 @@
+/**
+ * This is an entity class representing a comment from a writer. Each comment is associated with a Writer (who is
+ * associated with an Author in database).
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.book.editorial;
 
 import book.demo.java.entity.account.external.Writer;
@@ -43,10 +50,13 @@ public class WriterComment extends AbsComment implements Serializable {
         return CommenterType.WRITER;
     }
 
+    // Since this is a writer's comment, when getEditor() is called, an exception would be thrown to indicate that
+    // there is no editor to get.
     @Override
     @JsonIgnore
     public User getEditor() throws InvalidObjectException {
-        throw new InvalidObjectException("This is an writer comment, not an editor comment.");
+        throw new InvalidObjectException("This is an writer comment, not an editor comment. " +
+                "Please use getWriter() instead.");
     }
 
     @Override

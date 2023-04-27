@@ -27,8 +27,7 @@ public class CheckoutServiceImpl implements CheckoutService {
         }
 
         if (checkout.isAllEbook() && shippingType != ShippingType.NONE) {
-            throw new IllegalArgumentException("There are no physical books in cart " +
-                    "therefore shipping fee is not required.");
+            throw new IllegalArgumentException("There are no physical books in cart " + "therefore shipping fee is not required.");
         }
         checkout.updateShippingType(shippingType);
     }

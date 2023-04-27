@@ -1,3 +1,10 @@
+/**
+ * This Permission class represents the permission that would be granted to internal Users based on Role
+ * assignments mostly.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.account.internal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,14 +49,11 @@ public class Permission implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((Permission) obj).getId();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Permission that)) return false;
+        return getId() == that.getId() && getName().equals(that.getName())
+                && getDescription().equals(that.getDescription());
     }
 
     @Override

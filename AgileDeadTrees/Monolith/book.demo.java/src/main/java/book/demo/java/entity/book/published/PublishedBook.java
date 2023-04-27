@@ -1,7 +1,14 @@
+/**
+ * This is the entity class representing a published book in the publication company. Each published book
+ * could have multiple book variants (in different book format with corresponding prices). A published book
+ * could be associated with multiple Authors.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.book.published;
 
-
-import book.demo.java.entity.book.AbstractBook;
+import book.demo.java.entity.book.AbsBook;
 import book.demo.java.entity.book.Author;
 import book.demo.java.entity.book.Genre;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,7 +26,7 @@ import java.util.Set;
 @Entity
 @Table(name = "published_books")
 @Data
-public class PublishedBook extends AbstractBook implements Serializable {
+public class PublishedBook extends AbsBook implements Serializable {
     @Serial
     private static final long serialVersionUID = 3468877967393125144L;
 

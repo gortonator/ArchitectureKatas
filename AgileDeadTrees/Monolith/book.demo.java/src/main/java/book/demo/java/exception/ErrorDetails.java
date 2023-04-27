@@ -31,6 +31,7 @@ public class ErrorDetails {
         this.stacktrace = stacktrace;
     }
 
+
     public LocalDateTime getTimestamp() {
         return timestamp;
     }

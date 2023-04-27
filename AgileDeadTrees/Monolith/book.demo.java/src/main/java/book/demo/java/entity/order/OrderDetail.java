@@ -1,3 +1,11 @@
+/**
+ * This entity class represents the order details of a placed order. An Order could have multiple OrderDetails
+ * and each order detail contains information of the book variant and quantity that has bought with a calculated
+ * amount of subtotal.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.order;
 
 import book.demo.java.entity.book.published.BookVariant;

@@ -90,7 +90,6 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.7.0</version>
 		</dependency>
-<!--		http://localhost:8080/swagger-ui/index.html-->
 		<!--		Spring doc documentation End-->
 
 <!--		Utility Dependencies Start-->

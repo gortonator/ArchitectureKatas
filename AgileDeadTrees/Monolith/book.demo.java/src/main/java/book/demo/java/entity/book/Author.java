@@ -1,3 +1,10 @@
+/**
+ * This class represents an Author entity in the application. Each Author could have multiple PublishedBooks and
+ * DraftBooks. Additionally, a Writer account could be associated with a specific Author registered in the database.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.book;
 
 import book.demo.java.entity.book.editorial.DraftBook;

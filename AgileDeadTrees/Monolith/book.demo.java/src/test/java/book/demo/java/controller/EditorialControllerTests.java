@@ -40,17 +40,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(EditorialController.class)
 public class EditorialControllerTests {
 
+    private final String baseUrl = "/api/editorial";
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ObjectMapper objectMapper;
-
     @MockBean
     private EditorialService editorialService;
-
-    private final String baseUrl = "/api/editorial";
-
     private Author author1;
 
     private DraftBook draftBook1;

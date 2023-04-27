@@ -1,6 +1,13 @@
+/**
+ * This is the DraftBook entity that extends the abstract book entity. Each draft book is associated with multiple
+ * Authors and DraftChapters.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.book.editorial;
 
-import book.demo.java.entity.book.AbstractBook;
+import book.demo.java.entity.book.AbsBook;
 import book.demo.java.entity.book.Author;
 import book.demo.java.entity.book.Genre;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -15,7 +22,7 @@ import java.util.*;
 @Entity
 @Table(name = "draft_books")
 @Data
-public class DraftBook extends AbstractBook implements Serializable {
+public class DraftBook extends AbsBook implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 7201764923996149373L;

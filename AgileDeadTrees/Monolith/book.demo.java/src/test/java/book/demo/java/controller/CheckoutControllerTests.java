@@ -42,34 +42,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CheckoutController.class)
 public class CheckoutControllerTests {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private CheckoutService checkoutService;
-
-    @MockBean
-    private CartItemService cartItemService;
-
-    @MockBean
-    private OrderService orderService;
-
-    @MockBean
-    private EmailService emailService;
-
-    @MockBean
-    private ReaderService readerService;
-
     private final String baseUrl = "/api/checkout";
-
     private final String username = "reader";
     private final String password = "password";
     private final String email = "email";
     private final String CHECKOUT_SESSION_ATTR = "checkout";
-
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
+    @MockBean
+    private CheckoutService checkoutService;
+    @MockBean
+    private CartItemService cartItemService;
+    @MockBean
+    private OrderService orderService;
+    @MockBean
+    private EmailService emailService;
+    @MockBean
+    private ReaderService readerService;
     private Reader reader1;
 
     private Author author1;

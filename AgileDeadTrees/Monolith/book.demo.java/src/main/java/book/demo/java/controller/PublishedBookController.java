@@ -1,3 +1,18 @@
+/**
+ * This is a controller class handling HTTP requests related to PublishedBook entity.
+ * <p>
+ * Endpoints:
+ * GET /api/books/published/all: Get all published books.
+ * GET /api/books/published: Get all published books with pagination.
+ * GET /api/books/published/{bookId}: Get a published book by bookId.
+ * POST /api/books/published/create: Create a new published book.
+ * GET /api/books/published/s: Get all published books by author name and title keyword.
+ * DELETE /api/books/published/remove/{bookId}: Delete a published book by id.
+ *
+ * @author: Tong
+ * @see: PredefinedRoles
+ */
+
 package book.demo.java.controller;
 
 import book.demo.java.entity.book.published.PublishedBook;

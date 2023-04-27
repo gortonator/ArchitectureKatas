@@ -218,12 +218,20 @@ public class EditorialServiceImpl implements EditorialService {
         return publishedBookRepo.save(publishedBook);
     }
 
+    /*
+     * This helper method is used to check whether the Author trying to update the draft book
+     * is actually an author of the draft book.
+     */
     private void validateAuthorOfDraftBook(DraftBook draftBook, Author author) {
         if (!draftBook.getAuthors().contains(author)) {
             throw new UnauthorizedException(author.getFullName() + " is not an author of the draft book.");
         }
     }
 
+    /*
+     * This helper method is used to check whether the Author trying to update the draft chapter
+     * is actually an author of the draft chapter.
+     */
     private void validateAuthorOfDraftChapter(DraftChapter draftChapter, Author author) {
         if (draftChapter.getAuthor().getId() != author.getId()) {
             throw new UnauthorizedException(author.getFullName() + " is not the author of the draft chapter.");

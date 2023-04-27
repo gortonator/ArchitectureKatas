@@ -60,8 +60,7 @@ public class AuthServiceImpl implements AuthService {
         String encryptedPassword = getEncryptedPassword(user.getPassword(), user.getUsername());
         user.setPassword(encryptedPassword);
         User regUser = userRepo.save(user);
-        return new RegInfo(regUser.getFirstName(), regUser.getLastName(),
-                regUser.getUsername(), regUser.getEmail());
+        return new RegInfo(regUser.getFirstName(), regUser.getLastName(), regUser.getUsername(), regUser.getEmail());
     }
 
     @Override
@@ -69,21 +68,18 @@ public class AuthServiceImpl implements AuthService {
         String encryptedPassword = getEncryptedPassword(reader.getPassword(), reader.getUsername());
         reader.setPassword(encryptedPassword);
         Reader regReader = readerRepo.save(reader);
-        return new RegInfo(regReader.getFirstName(), regReader.getLastName(),
-                regReader.getUsername(), regReader.getEmail());
+        return new RegInfo(regReader.getFirstName(), regReader.getLastName(), regReader.getUsername(), regReader.getEmail());
     }
 
     @Override
     public RegInfo registerWriter(Writer writer, int authorId) {
-        Author author = authorRepo.findById(authorId).orElseThrow(
-                () -> new NoSuchElementException("Author with id " + authorId + " not found."));
+        Author author = authorRepo.findById(authorId).orElseThrow(() -> new NoSuchElementException("Author with id " + authorId + " not found."));
         writer.setAuthor(author);
         String encryptedPassword = getEncryptedPassword(writer.getPassword(), writer.getUsername());
         writer.setPassword(encryptedPassword);
         Writer regWriter = writerRepo.save(writer);
 
-        return new RegInfo(author.getFirstName(), author.getLastName(),
-                regWriter.getUsername(), regWriter.getEmail());
+        return new RegInfo(author.getFirstName(), author.getLastName(), regWriter.getUsername(), regWriter.getEmail());
     }
 
     private void executeLogin(String username, String password, LoginType loginType) {
@@ -93,6 +89,7 @@ public class AuthServiceImpl implements AuthService {
         if (!subject.isAuthenticated()) token.clear();
     }
 
+    // username is used as salt for encryption
     private String getEncryptedPassword(String inputPassword, String inputUsername) {
         return new SimpleHash("MD5", inputPassword, inputUsername, 1024).toString();
     }

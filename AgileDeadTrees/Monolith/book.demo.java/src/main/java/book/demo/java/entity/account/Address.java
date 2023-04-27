@@ -1,3 +1,10 @@
+/**
+ * This is an Address entity class that contains properties representing detailed address information. The class has a
+ * OneToOne association with Reader class.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.account;
 
 import book.demo.java.entity.account.external.Reader;
@@ -23,28 +30,28 @@ public class Address implements Serializable {
     private int id;
 
     @Column(name = "first_name", nullable = false, length = 45)
-    protected String firstName;
+    private String firstName;
 
     @Column(name = "last_name", nullable = false, length = 45)
-    protected String lastName;
+    private String lastName;
 
     @Column(name = "phone_number", nullable = false, length = 15)
-    protected String phoneNumber;
+    private String phoneNumber;
 
     @Column(name = "address_line_1", nullable = false, length = 64)
-    protected String addressLine1;
+    private String addressLine1;
 
     @Column(name = "address_line_2", length = 64)
-    protected String addressLine2;
+    private String addressLine2;
 
     @Column(nullable = false, length = 45)
-    protected String city;
+    private String city;
 
     @Column(nullable = false, length = 45)
-    protected String state;
+    private String state;
 
     @Column(name = "postal_code", nullable = false, length = 10)
-    protected String postalCode;
+    private String postalCode;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reader_id")
@@ -54,8 +61,7 @@ public class Address implements Serializable {
     public Address() {
     }
 
-    public Address(String firstName, String lastName, String phoneNumber, String addressLine1, String addressLine2,
-                   String city, String state, String postalCode, Reader reader) {
+    public Address(String firstName, String lastName, String phoneNumber, String addressLine1, String addressLine2, String city, String state, String postalCode, Reader reader) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -71,16 +77,11 @@ public class Address implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Address address)) return false;
-        return getId() == address.getId() && getFirstName().equals(address.getFirstName())
-                && getLastName().equals(address.getLastName()) && getPhoneNumber().equals(address.getPhoneNumber())
-                && getAddressLine1().equals(address.getAddressLine1())
-                && Objects.equals(getAddressLine2(), address.getAddressLine2()) && getCity().equals(address.getCity())
-                && getState().equals(address.getState()) && getPostalCode().equals(address.getPostalCode());
+        return getId() == address.getId() && getFirstName().equals(address.getFirstName()) && getLastName().equals(address.getLastName()) && getPhoneNumber().equals(address.getPhoneNumber()) && getAddressLine1().equals(address.getAddressLine1()) && Objects.equals(getAddressLine2(), address.getAddressLine2()) && getCity().equals(address.getCity()) && getState().equals(address.getState()) && getPostalCode().equals(address.getPostalCode());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getPhoneNumber(), getAddressLine1(),
-                getAddressLine2(), getCity(), getState(), getPostalCode());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getPhoneNumber(), getAddressLine1(), getAddressLine2(), getCity(), getState(), getPostalCode());
     }
 }

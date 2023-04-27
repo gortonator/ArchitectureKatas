@@ -31,22 +31,17 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class CartItemServiceImplTest {
 
-    @Mock
-    private CartItemRepository cartItemRepository;
-
-    @Mock
-    private BookVariantRepository bookVariantRepository;
-
-    @Mock
-    private ReaderRepository readerRepository;
-
-    @InjectMocks
-    private CartItemServiceImpl cartItemService;
-
     private final String username = "reader";
     private final String password = "password";
     private final String email = "email";
-
+    @Mock
+    private CartItemRepository cartItemRepository;
+    @Mock
+    private BookVariantRepository bookVariantRepository;
+    @Mock
+    private ReaderRepository readerRepository;
+    @InjectMocks
+    private CartItemServiceImpl cartItemService;
     private Reader reader1;
 
     private Author author1;

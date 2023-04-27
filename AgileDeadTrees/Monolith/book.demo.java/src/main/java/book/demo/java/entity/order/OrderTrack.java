@@ -1,3 +1,9 @@
+/**
+ * This is an entity class representing the tracking of a placed order.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.order;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;

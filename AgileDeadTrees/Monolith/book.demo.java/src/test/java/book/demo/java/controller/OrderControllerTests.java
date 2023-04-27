@@ -40,17 +40,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(OrderController.class)
 public class OrderControllerTests {
 
+    private final String baseUrl = "/api/orders";
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ObjectMapper objectMapper;
-
     @MockBean
     private OrderService orderService;
-
-    private final String baseUrl = "/api/orders";
-
     private Reader reader1;
 
     private Order order1;

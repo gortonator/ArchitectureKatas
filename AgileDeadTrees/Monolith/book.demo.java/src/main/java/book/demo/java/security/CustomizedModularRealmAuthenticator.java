@@ -22,6 +22,12 @@ public class CustomizedModularRealmAuthenticator extends ModularRealmAuthenticat
 
         Collection<Realm> realms = getRealms();
 
+        /*
+         * Select the corresponding realm for authentication based on the loginType
+         * passed in through the token.
+         * In this application, only one required realm is needed but there could be furthered modification made
+         * if additional authentication are needed.
+         */
         Set<Realm> requiredRealms = new HashSet<>();
         for (Realm realm : realms) {
             if (realm.getName().toUpperCase().contains(loginType)) {

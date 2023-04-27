@@ -36,28 +36,26 @@ public class CartItemServiceImpl implements CartItemService {
         return cartRepo.findByReaderUsername(username);
     }
 
-
     public CartItem addCartItem(int bookVariantId, int quantity, String username) {
         CartItem cartItem = cartRepo.findByReaderIdAndBookVariantId(username, bookVariantId);
 
+        // If the book variant has been added to the reader's cart before, then update the quantity value
         if (cartItem != null) {
             cartItem.setQuantity(quantity);
         } else {
+            // If cartItem is null (meaning the book variant has not been added to cart before),
+            // then a new CartItem would be created.
             Reader reader = readerRepo.findByUsername(username);
             if (reader == null) {
                 throw new NoSuchElementException("Reader username " + username + " NOT FOUND.");
             }
-            BookVariant bookVariant = bookVariantRepo.findById(bookVariantId).orElseThrow(() ->
-                    new NoSuchElementException("Book variant id " + bookVariantId + " NOT FOUND."));
+            BookVariant bookVariant = bookVariantRepo.findById(bookVariantId).orElseThrow(() -> new NoSuchElementException("Book variant id " + bookVariantId + " NOT FOUND."));
             cartItem = new CartItem(reader, bookVariant, quantity);
         }
         return cartRepo.save(cartItem);
     }
 
-
     public void removeByReaderIdAndBookVariantId(String username, int bookVariantId) {
         cartRepo.deleteByReaderIdAndBookVariantId(username, bookVariantId);
     }
-
-
 }

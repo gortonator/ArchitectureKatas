@@ -1,3 +1,10 @@
+/**
+ * This class represents an Order entity. A Reader could have multiple orders placed. Each order contains multiple
+ * order details to represent entries in order. Mostly the properties of an order are set by a Checkout object.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.order;
 
 import book.demo.java.entity.account.Address;
@@ -46,7 +53,6 @@ public class Order implements Serializable {
     @JsonBackReference
     private Address address;
 
-    //    @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     @Column(name = "datetime_created", nullable = false)
     private LocalDateTime datetimeCreated = LocalDateTime.now();

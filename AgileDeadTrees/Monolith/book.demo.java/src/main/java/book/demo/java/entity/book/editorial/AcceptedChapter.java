@@ -1,3 +1,11 @@
+/**
+ * This is the AcceptedChapter entity that extends an abstract chapter. It represents a chapter that has been created
+ * by Writer and accepted by Editor (User with Editor role). Each accepted chapter in database is bounded by the
+ * constraint of having unique draft book id and chapter id combination.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.book.editorial;
 
 import book.demo.java.entity.book.Author;

@@ -1,3 +1,11 @@
+/**
+ * This is the DraftChapter entity that extends the abstract chapter class. Its content field that represents the
+ * current content, while pendingContent field is the edited content from editor, waiting for acceptation from author
+ * of the draft chapter.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.book.editorial;
 
 import book.demo.java.entity.book.Author;
@@ -22,6 +30,8 @@ public class DraftChapter extends AbsChapter implements Serializable {
     @Column(name = "draft_chapter_id")
     private int id;
 
+    // This field is specifically for storing the pending edits from an Editor,
+    // which would be of pending acceptation from the author.
     @Column(name = "pending_content")
 //    @Lob
     private String pendingContent;

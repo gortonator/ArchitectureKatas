@@ -1,3 +1,10 @@
+/**
+ * This is the Role entity class, which is the basic element for role based access control. User entities could be
+ * assigned with multiple Roles which further enables them to have certain Permissions.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.account.internal;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,18 +25,14 @@ public class Role implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 4017720062381140477L;
-
+    @Column(length = 40, nullable = false, unique = true)
+    protected String name;
+    @Column(length = 150, nullable = false)
+    protected String description;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     private int id;
-
-    @Column(length = 40, nullable = false, unique = true)
-    protected String name;
-
-    @Column(length = 150, nullable = false)
-    protected String description;
-
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<User> users = new HashSet<>();
@@ -73,14 +76,11 @@ public class Role implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) return false;
-
-        if (this == obj) return true;
-
-        if (getClass() != obj.getClass()) return false;
-
-        return id == ((Role) obj).getId();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Role role)) return false;
+        return getId() == role.getId() && getName().equals(role.getName())
+                && getDescription().equals(role.getDescription());
     }
 
     @Override

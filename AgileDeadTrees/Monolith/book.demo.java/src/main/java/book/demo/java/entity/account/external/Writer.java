@@ -1,3 +1,10 @@
+/**
+ * This is the entity class of an external user called Writer.
+ * Writer class extends AbsExternal and each Writer account corresponds to an Author in the database system.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.entity.account.external;
 
 import book.demo.java.entity.book.Author;
@@ -22,6 +29,7 @@ public class Writer extends AbsExternalUser implements Serializable {
     @Column(name = "writer_id")
     private int id;
 
+    // Each Writer account is associated with a corresponding Author entity in database.
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     @JsonBackReference

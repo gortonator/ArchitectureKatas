@@ -1,3 +1,21 @@
+/**
+ * This is the controller class for handling HTTP requests related to subject authentication, including operations like
+ * logging in, logging out, and signing up.
+ * <p>
+ * Endpoints:
+ * POST /api/user/login: User login.
+ * POST /api/reader/login: Reader login.
+ * POST /api/writer/login: Writer login.
+ * POST /api/logout: logout.
+ * POST /api/user/register: Register a User.
+ * POST /api/reader/register: Register a Reader.
+ * POST /api/writer/register: Register a Writer.
+ * GET /api/toLogin: directed page when authentication is needed.
+ * GET /api/unauthorized: directed page when subject is unauthorized for a certain endpoint.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.controller;
 
 import book.demo.java.dto.RegInfo;
@@ -25,6 +43,14 @@ public class LoginSignUpController {
     /*
      * Below is the Login service section.
      */
+
+    /**
+     * This endpoint provides login functionalities of User login.
+     *
+     * @param username the username of the User.
+     * @param password the password of the User.
+     * @return A ResponseEntity indicating whether authentication is successful or not and an HTTP status code.
+     */
     @Operation(summary = "Login API for User.")
     @PostMapping("/user/login")
     public ResponseEntity<String> userLogin(String username, String password) {
@@ -33,6 +59,13 @@ public class LoginSignUpController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * This endpoint provides login functionalities of Reader login.
+     *
+     * @param username the username of the Reader.
+     * @param password the password of the Reader.
+     * @return A ResponseEntity indicating whether authentication is successful or not and an HTTP status code.
+     */
     @Operation(summary = "Login API for Reader.")
     @PostMapping("/reader/login")
     public ResponseEntity<String> readerLogin(String username, String password) {
@@ -41,6 +74,13 @@ public class LoginSignUpController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * This endpoint provides login functionalities of Writer login.
+     *
+     * @param username the username of the Writer.
+     * @param password the password of the Writer.
+     * @return A ResponseEntity indicating whether authentication is successful or not and an HTTP status code.
+     */
     @Operation(summary = "Login API for Writer.")
     @PostMapping("/writer/login")
     public ResponseEntity<String> writerLogin(String username, String password) {
@@ -49,16 +89,30 @@ public class LoginSignUpController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * The current subject logs out and HTTP session gets invalidated.
+     *
+     * @param session the current HTTP session.
+     * @return A ResponseEntity containing a String message and an HTTP status code
+     */
     @Operation(summary = "Log out page.")
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpSession session) {
         authService.logout();
+        session.invalidate();
         String response = "Successfully logged out.";
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     /*
      * Below is the Registration service section.
+     */
+
+    /**
+     * An endpoint for registering a User.
+     *
+     * @param user User to be registered.
+     * @return A ResponseEntity containing registration information.
      */
     @Operation(summary = "Registration API for User.")
     @PostMapping("/user/register")
@@ -68,6 +122,12 @@ public class LoginSignUpController {
         return new ResponseEntity<>(info, HttpStatus.CREATED);
     }
 
+    /**
+     * An endpoint for registering a Reader.
+     *
+     * @param reader Reader to be registered.
+     * @return A ResponseEntity containing registration information.
+     */
     @Operation(summary = "Registration API for Reader.")
     @PostMapping("/reader/register")
     public ResponseEntity<RegInfo> readerRegister(@RequestBody Reader reader) {
@@ -75,6 +135,12 @@ public class LoginSignUpController {
         return new ResponseEntity<>(info, HttpStatus.CREATED);
     }
 
+    /**
+     * An endpoint for registering a Writer.
+     *
+     * @param writer Writer to be registered.
+     * @return A ResponseEntity containing registration information.
+     */
     @Operation(summary = "Registration API for Writer.")
     @PostMapping("/writer/register")
     public ResponseEntity<RegInfo> writerRegister(@RequestBody Writer writer, @RequestParam int authorId) {
@@ -83,17 +149,19 @@ public class LoginSignUpController {
     }
 
     /*
-    Other endpoints.
+     * Other useful endpoints.
      */
+
+
     @Operation(summary = "Need to login page.")
-    @RequestMapping("/toLogin")
+    @GetMapping("/toLogin")
     @ResponseBody
     public String toLogin() {
         return "You are directed to the toLogin page.";
     }
 
     @Operation(summary = "No authorization page.")
-    @RequestMapping("/unauthorized")
+    @GetMapping("/unauthorized")
     @ResponseBody
     public String noAuth() {
         return "Unauthorized to view.";

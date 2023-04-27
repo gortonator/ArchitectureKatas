@@ -1,3 +1,17 @@
+/**
+ * This is a controller class handling HTTP requests related to User entity manipulation.
+ * <p>
+ * Endpoints:
+ * GET /api/users/all: Get all users.
+ * GET /api/users/{userId}: Get a user by userId.
+ * PUT /api/users/add-role: Add a role to user.
+ * <p>
+ * Notes:
+ * Additional dto could be used when returning User information to exclude fields like password.
+ *
+ * @author Tong
+ */
+
 package book.demo.java.controller;
 
 import book.demo.java.entity.account.internal.Role;

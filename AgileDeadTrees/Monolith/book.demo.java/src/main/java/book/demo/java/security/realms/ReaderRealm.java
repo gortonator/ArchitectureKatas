@@ -34,7 +34,8 @@ public class ReaderRealm extends AuthorizingRealm {
 
 
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
+            throws AuthenticationException {
 
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String tokenUsername = token.getUsername();
@@ -45,7 +46,8 @@ public class ReaderRealm extends AuthorizingRealm {
         }
 
         String password = reader.getPassword();
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(tokenUsername, password, getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
+                tokenUsername, password, getName());
         simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(tokenUsername));
         return simpleAuthenticationInfo;
     }

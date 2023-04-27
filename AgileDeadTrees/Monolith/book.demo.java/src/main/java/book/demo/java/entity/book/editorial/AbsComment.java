@@ -1,3 +1,10 @@
+/**
+ * This is an abstract class that contains some basic common properties of a comment made by Editor or Writer. Each
+ * comment is associated with a Review made by editor.
+ *
+ * @author
+ */
+
 package book.demo.java.entity.book.editorial;
 
 import book.demo.java.entity.account.external.Writer;
@@ -37,8 +44,10 @@ public abstract class AbsComment {
         this.review = review;
     }
 
+    // get the commenter type of the comment: editor or writer
     public abstract CommenterType getCommenterType();
 
+    // get the username of the commenter
     public abstract String getCommenterUsername();
 
     @JsonIgnore

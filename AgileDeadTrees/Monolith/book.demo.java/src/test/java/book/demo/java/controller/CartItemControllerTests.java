@@ -38,24 +38,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(CartItemController.class)
 public class CartItemControllerTests {
 
-    private String baseUrl;
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private CartItemService cartItemService;
-
-    @MockBean
-    private ReaderService readerService;
-
     private final String username = "reader";
     private final String password = "password";
     private final String email = "email";
-
+    private String baseUrl;
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private ObjectMapper objectMapper;
+    @MockBean
+    private CartItemService cartItemService;
+    @MockBean
+    private ReaderService readerService;
     private Reader reader1;
 
     private Author author1;

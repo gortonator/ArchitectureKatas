@@ -27,18 +27,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(PublishedBookController.class)
 public class PublishedBookControllerTests {
 
+    private final String baseUrl = "/api/books/published";
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ObjectMapper objectMapper;
-
     @MockBean
     private PublishedBookService publishedBookService;
-
-    private final String baseUrl = "/api/books/published";
     ;
-
     private PublishedBook publishedBook1;
 
     private List<PublishedBook> publishedBooks;

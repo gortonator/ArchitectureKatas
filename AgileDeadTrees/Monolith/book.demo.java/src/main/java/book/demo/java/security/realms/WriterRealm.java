@@ -34,7 +34,8 @@ public class WriterRealm extends AuthorizingRealm {
     }
 
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken)
+            throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String tokenUsername = token.getUsername();
         Writer writer = writerService.findWriterByUsername(tokenUsername);
@@ -44,7 +45,8 @@ public class WriterRealm extends AuthorizingRealm {
         }
 
         String password = writer.getPassword();
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(tokenUsername, password, getName());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(
+                tokenUsername, password, getName());
         simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(tokenUsername));
         return simpleAuthenticationInfo;
     }

@@ -1,6 +1,6 @@
 /**
  * This is the entity class of an external user called Reader.
- * Readers class extends AbsExternal and includes additional fields such as firstName, lastName, etc.
+ * Reader class extends AbsExternal and includes additional fields such as firstName, lastName, etc.
  *
  * @author Tong
  */
