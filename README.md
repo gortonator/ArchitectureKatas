@@ -1,4 +1,4 @@
-Implementing Architecture Katas
+### Implementing Architecture Katas
 
 Software architecture katas are an approach to explore different architecture design strategies within the framework of a synthetic business problem. Popularized by Neal Ford, a kata is a brief, broad statement of requirements, business goals and constraints. They enable students, typically small groups of developers and architects, to propose different architectural approaches, and analyze and discuss the inevitable trade-offs that impact system qualities.
 
