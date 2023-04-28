@@ -10,9 +10,9 @@ import book.demo.java.service.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Transactional
 @Service
@@ -47,9 +47,10 @@ public class CartItemServiceImpl implements CartItemService {
             // then a new CartItem would be created.
             Reader reader = readerRepo.findByUsername(username);
             if (reader == null) {
-                throw new NoSuchElementException("Reader username " + username + " NOT FOUND.");
+                throw new EntityNotFoundException("Reader username " + username + " NOT FOUND.");
             }
-            BookVariant bookVariant = bookVariantRepo.findById(bookVariantId).orElseThrow(() -> new NoSuchElementException("Book variant id " + bookVariantId + " NOT FOUND."));
+            BookVariant bookVariant = bookVariantRepo.findById(bookVariantId).orElseThrow(() ->
+                    new EntityNotFoundException("Book variant id " + bookVariantId + " NOT FOUND."));
             cartItem = new CartItem(reader, bookVariant, quantity);
         }
         return cartRepo.save(cartItem);

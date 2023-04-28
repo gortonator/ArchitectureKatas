@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
@@ -31,9 +32,9 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         );
     }
 
-    @ExceptionHandler(NoSuchElementException.class)
-    public final ResponseEntity<ErrorDetails> handleNoSuchElementExceptions(NoSuchElementException ex,
-                                                                            WebRequest request) {
+    @ExceptionHandler(EntityExistsException.class)
+    public final ResponseEntity<ErrorDetails> handleEntityNotFoundExceptions(EntityNotFoundException ex,
+                                                                             WebRequest request) {
         return new ResponseEntity<>(
                 new ErrorDetails(
                         ex.getClass().getName(),

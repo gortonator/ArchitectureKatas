@@ -13,11 +13,11 @@ import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -256,20 +256,20 @@ public class EditorialServiceImpl implements EditorialService {
 
     private DraftChapter findDraftChapter(int draftChapterId) {
         return draftChapterRepo.findById(draftChapterId)
-                .orElseThrow(() -> new NoSuchElementException(
+                .orElseThrow(() -> new EntityNotFoundException(
                         "Draft Chapter with id " + draftChapterId + " not found."));
     }
 
     private DraftBook findDraftBook(int draftBookId) {
         return draftBookRepo.findById(draftBookId)
-                .orElseThrow(() -> new NoSuchElementException(
+                .orElseThrow(() -> new EntityNotFoundException(
                         "Draft Book with id " + draftBookId + " not found."));
     }
 
     private Writer findWriterByUsername(String username) {
         Writer writer = writerRepo.findByUsername(username);
         if (writer == null) {
-            throw new NoSuchElementException(
+            throw new EntityNotFoundException(
                     "Writer with username" + username + " not found.");
         }
         return writer;
@@ -278,7 +278,7 @@ public class EditorialServiceImpl implements EditorialService {
     private User findEditorByUsername(String username) {
         User editor = userRepo.findByUsername(username);
         if (editor == null) {
-            throw new NoSuchElementException(
+            throw new EntityNotFoundException(
                     "Editor with username" + username + " not found.");
         }
         return editor;
@@ -287,7 +287,7 @@ public class EditorialServiceImpl implements EditorialService {
     private Review findReviewByChapterId(int draftChapterId) {
         Review review = findDraftChapter(draftChapterId).getReview();
         if (review == null) {
-            throw new NoSuchElementException("Review for draft chapter with id " + draftChapterId + " not found.");
+            throw new EntityNotFoundException("Review for draft chapter with id " + draftChapterId + " not found.");
         }
         return review;
     }

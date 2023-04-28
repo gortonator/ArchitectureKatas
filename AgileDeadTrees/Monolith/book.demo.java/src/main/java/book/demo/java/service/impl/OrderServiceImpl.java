@@ -14,10 +14,10 @@ import book.demo.java.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Transactional
 @Service
@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order getOrder(int orderId) {
         return orderRepo.findById(orderId).orElseThrow(() ->
-                new NoSuchElementException("Order id " + orderId + " NOT FOUND."));
+                new EntityNotFoundException("Order id " + orderId + " NOT FOUND."));
     }
 
     @Override

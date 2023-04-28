@@ -6,8 +6,8 @@ import book.demo.java.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -19,6 +19,6 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role findById(int roleId) {
         return roleRepo.findById(roleId).orElseThrow(() ->
-                new NoSuchElementException("Role not found with given id."));
+                new EntityNotFoundException("Role not found with given id."));
     }
 }

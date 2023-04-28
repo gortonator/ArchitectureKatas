@@ -18,7 +18,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.NoSuchElementException;
+import javax.persistence.EntityNotFoundException;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -73,7 +73,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public RegInfo registerWriter(Writer writer, int authorId) {
-        Author author = authorRepo.findById(authorId).orElseThrow(() -> new NoSuchElementException("Author with id " + authorId + " not found."));
+        Author author = authorRepo.findById(authorId).orElseThrow(() -> new EntityNotFoundException("Author with id " + authorId + " not found."));
         writer.setAuthor(author);
         String encryptedPassword = getEncryptedPassword(writer.getPassword(), writer.getUsername());
         writer.setPassword(encryptedPassword);

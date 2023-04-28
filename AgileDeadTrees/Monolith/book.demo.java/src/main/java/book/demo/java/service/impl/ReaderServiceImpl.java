@@ -9,9 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Transactional
 @Service
@@ -34,7 +34,7 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public Reader getReaderById(int readerId) {
         return readerRepository.findById(readerId)
-                .orElseThrow(() -> new NoSuchElementException("Reader id " + readerId + " NOT FOUND."));
+                .orElseThrow(() -> new EntityNotFoundException("Reader id " + readerId + " NOT FOUND."));
     }
 
     @Override

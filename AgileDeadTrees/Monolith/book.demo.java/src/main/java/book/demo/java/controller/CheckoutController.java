@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api/checkout")
@@ -168,7 +167,7 @@ public class CheckoutController {
      * @return Checkout object retrieved from HTTP session.
      * @throws UnauthenticatedException if current session is new, meaning that the (previous) session containing
      *                                  checkout information has expired and therefore needs a new session.
-     * @throws NoSuchElementException   if shopping cart is empty and no checkout would be generated.
+     * @throws NullPointerException     if shopping cart is empty and no checkout would be generated.
      */
     private Checkout retrieveCheckoutFromSession(HttpSession session) {
         if (session.isNew()) {
@@ -176,7 +175,7 @@ public class CheckoutController {
         }
         Checkout checkout = (Checkout) session.getAttribute(CHECKOUT_SESSION_ATTR);
         if (checkout == null) {
-            throw new NoSuchElementException("Your shopping cart is empty. " +
+            throw new NullPointerException("Your shopping cart is empty. " +
                     "Please add items to your cart and checkout again.");
         }
         return checkout;
