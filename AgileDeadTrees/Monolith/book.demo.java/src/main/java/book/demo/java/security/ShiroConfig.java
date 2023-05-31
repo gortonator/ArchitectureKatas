@@ -3,6 +3,7 @@ package book.demo.java.security;
 import book.demo.java.security.realms.ReaderRealm;
 import book.demo.java.security.realms.UserRealm;
 import book.demo.java.security.realms.WriterRealm;
+
 import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
@@ -127,5 +128,4 @@ public class ShiroConfig {
         creator.setProxyTargetClass(true);
         return creator;
     }
-
 }
