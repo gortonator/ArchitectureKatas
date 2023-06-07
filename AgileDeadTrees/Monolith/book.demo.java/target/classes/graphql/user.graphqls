@@ -1,0 +1,59 @@
+type User {
+   id: Int
+   firstName: String
+   lastName: String
+   username: String
+   password: String
+   email: String
+   roles: [Role]!
+  
+}
+
+input UserInput {
+   id: Int
+   firstName: String
+   lastName: String
+   username: String
+   password: String
+   email: String
+   roles: [RoleInput]!
+}
+
+
+type Role {
+   id: Int
+   name: String
+   description: String
+   permissions: [Permission]!
+}
+
+type Permission {
+   id: Int
+   name: String
+   description: String
+}
+
+input PermissionInput {
+   id: Int
+   name: String
+   description: String
+}
+
+input RoleInput {
+   id: Int
+   name: String
+   description: String
+   permissions: [PermissionInput]!
+}
+
+
+type Query {
+   getAllUsers: [User]!
+   findById(id: Int): User
+   findByUsername(userName: String): User
+}
+
+
+type Mutation {
+   addRoleToUser(user: UserInput, role: RoleInput): User
+}

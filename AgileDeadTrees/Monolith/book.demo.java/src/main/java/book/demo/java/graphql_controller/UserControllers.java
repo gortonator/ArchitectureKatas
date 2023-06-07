@@ -29,10 +29,10 @@ public class UserControllers {
    }
 
 
-//    @QueryMapping
-//    public User findById(@Argument Integer userId) {
-//        return userService.findById(userId);
-//    }
+   @QueryMapping
+   public User findById(@Argument Integer id) {
+       return userService.findById(id);
+   }
 
    @QueryMapping
    public User findByUsername(@Argument String username) {
@@ -40,8 +40,8 @@ public class UserControllers {
    }
 
 
-//    @MutationMapping
-//    public User addRoleToUser(@Argument User user, @Argument Role role) {
-//        return userService.addRoleToUser(user,role);
-//    }
+   @MutationMapping
+   public User addRoleToUser(@Argument User user, @Argument Role role) {
+       return userService.addRoleToUser(user,role);
+   }
 }

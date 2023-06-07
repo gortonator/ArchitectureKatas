@@ -1,0 +1,28 @@
+type PageReader {
+    totalElements: Int
+    totalPages: Int
+    first: Boolean
+    pageable: PageableObject
+    last: Boolean
+    numberOfElements: Int
+    sort: SortObject
+    size: Int
+    content: Reader
+    number: Int
+    empty: Boolean
+}
+
+type PageableObject {
+    pageNumber: Int
+    pageSize: Int
+    paged: Boolean
+    unpaged: Boolean
+    sort: SortObject
+    offset: Int
+}
+
+type SortObject {
+    unsorted: Boolean
+    sorted: Boolean
+    empty: Boolean
+}

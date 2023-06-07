@@ -12,6 +12,7 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.util.ThreadContext;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
@@ -98,6 +99,7 @@ public class ShiroConfig {
         ModularRealmAuthorizer modularRealmAuthorizer = customizedModularRealmAuthorizer();
         modularRealmAuthorizer.setRealms(realms);
         securityManager.setAuthorizer(modularRealmAuthorizer);
+        ThreadContext.bind(securityManager);
 
         return securityManager;
     }

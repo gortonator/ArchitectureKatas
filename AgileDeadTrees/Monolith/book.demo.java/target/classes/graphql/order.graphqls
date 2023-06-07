@@ -1,0 +1,48 @@
+type Order {
+    id: Int
+    orderDetails: [OrderDetail]!
+    reader: Reader
+    address: Address
+    datetimeCreated: String
+    orderStatus: OrderStatus
+    orderTracks: [OrderTrack]!
+    paymentType: PaymentType
+    shippingType: ShippingType
+    subtotal: Float
+    shippingFee: Float
+    numOfItems: Int
+    grandTotal: Float
+    deliverDays: Int
+    expectedDeliverDate: String
+}
+
+enum OrderStatus {
+    PAID, CANCELLED, PROCESSING, SHIPPED, DELIVERED, RETURN_REQUESTED, RETURNED, REFUNDED
+    
+}
+
+enum PaymentType {
+    CARD, PAYPAL, VENMO
+}
+
+enum ShippingType {
+    STANDARD, EXPRESS, NONE
+}
+
+type OrderDetail {
+    id: Int
+    bookVariant: BookVariant
+    order: Order
+    quantity: Int
+    subtotal: Float
+    bookVariantId: Int
+
+}
+
+type OrderTrack {
+    id: Int
+    order: Order
+    details: String
+    timestamp: String
+
+}
