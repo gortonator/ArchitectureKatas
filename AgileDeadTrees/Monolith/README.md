@@ -53,4 +53,15 @@ To start the application locally, please follow the steps below:
 3. Run **`Application.main()`**.
 4. To check out the Swagger documentation of the application, simply go to `http://localhost:8080/swagger-ui/index.html` in your web browser (by default using port `8080` to run the application).
 5. To generate dummy data in database, you could run the `data_generation.sql` file under the `docs` folder. By default, the database name is set to `book_company`. If you wish to use other database name, please align it with the one you set in the `application.properties` file in step 2.
+6. For log in testing purpose, please use the username and password combination below:
+   
+   | **Subject** | **Username** | **Password**    |
+   |:-----------:|:------------:|:---------------:|
+   | User        | admin        | adminpassword   |
+   | User        | manager      | managerpassword |
+   | User        | editor       | editorpassword  |
+   | Reader      | reader1      | password1       |
+   | Reader      | reader2      | password2       |
+   | Writer      | writer1      | password1       |
+   | Writer      | writer2      | password2       |
 
