@@ -1,0 +1,29 @@
+type CartItem {
+    id: Int
+    quantity: Int
+    reader: Reader
+    bookVariant: BookVariant
+    subtotal: Float
+    idOfReader: Int
+    idOfBookVariant: Int
+}
+
+input CartItemInput {
+    id: Int
+    quantity: Int
+    reader: ReaderInput
+    bookVariant: BookVariantInput
+    subtotal: Float
+    idOfReader: Int
+    idOfBookVariant: Int
+}
+
+extend type Query {
+    getCartItemsByReaderId(readerId: Int): [CartItem]!
+    getCartItemsByReaderUsername(username: String): [CartItem]!
+}
+
+extend type Mutation {
+   addCartItem(bookVariantId: Int, quantity: Int): CartItem
+   removeByReaderIdAndBookVariantId(username: String, bookVariantId: Int): Boolean
+}

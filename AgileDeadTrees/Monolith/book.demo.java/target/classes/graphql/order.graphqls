@@ -16,6 +16,24 @@ type Order {
     expectedDeliverDate: String
 }
 
+input OrderInput {
+    id: Int
+    orderDetails: [OrderDetailInput]!
+    reader: ReaderInput
+    address: AddressInput
+    datetimeCreated: String
+    orderStatus: OrderStatus
+    orderTracks: [OrderTrackInput]!
+    paymentType: PaymentType
+    shippingType: ShippingType
+    subtotal: Float
+    shippingFee: Float
+    numOfItems: Int
+    grandTotal: Float
+    deliverDays: Int
+    expectedDeliverDate: String
+}
+
 enum OrderStatus {
     PAID, CANCELLED, PROCESSING, SHIPPED, DELIVERED, RETURN_REQUESTED, RETURNED, REFUNDED
     
@@ -39,10 +57,41 @@ type OrderDetail {
 
 }
 
+input OrderDetailInput {
+    id: Int
+    bookVariant: BookVariantInput
+    order: OrderInput
+    quantity: Int
+    subtotal: Float
+    bookVariantId: Int
+
+}
+
 type OrderTrack {
     id: Int
     order: Order
     details: String
     timestamp: String
 
+}
+
+input OrderTrackInput {
+    id: Int
+    order: OrderInput
+    details: String
+    timestamp: String
+
+}
+
+extend type Query {
+    getOrdersByReaderID(id: Int): [Order]!
+    getOrder(orderId: Int): Order
+
+}
+
+extend type Mutation {
+    createOrder(reader: ReaderInput, checkout: CheckoutInput): Order
+    setOrderStatus(orderId: Int, status: OrderStatus): Order
+    createOrderTrack(orderId: Int, description: String): OrderTrack
+    deleteOrder(orderId: Int): Boolean
 }

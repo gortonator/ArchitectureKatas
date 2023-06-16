@@ -1,0 +1,19 @@
+type DraftBook {
+    title: String
+    genre: BookGenre
+    id: Int
+    acceptedChapters: AcceptedChapter
+    draftChapters: DraftChapter
+}
+
+input DraftBookInput {
+    title: String
+    genre: BookGenre
+    id: Int
+    acceptedChapters: AcceptedChapterInput
+    draftChapters: DraftChapterInput
+}
+
+enum BookGenre {
+    SCIENCE_FICTION, HORROR, MYSTERY, ROMANCE, FANTASY
+}

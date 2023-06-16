@@ -1,0 +1,16 @@
+type RegInfo {
+    firstName: String
+    lastName: String
+    username: String
+    email: String
+}
+
+extend type Mutation {
+    userLogin(username: String, password: String): Boolean
+    readerLogin(username: String, password: String): Boolean
+    writerLogin(username: String, password: String): Boolean
+    logout: Boolean
+    registerUser(user: UserInput): RegInfo
+    registerReader(reader: ReaderInput): RegInfo
+    registerWriter(writer: WriterInput, authorId: Int): RegInfo
+}

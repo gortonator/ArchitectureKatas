@@ -7,6 +7,15 @@ type BookVariant {
     price: Float
 }
 
+input BookVariantInput {
+    id: Int
+    book: PublishedBookInput
+    isbn: String
+    format: Format
+    publishDate: String
+    price: Float
+}
+
 enum Format {
     PAPERBACK, HARDCOVER, EBOOK
 }
@@ -15,9 +24,30 @@ type PublishedBook {
     title: String
     genre: Genre
     id: Int
-    bookVariants: BookVariant
+    bookVariants: [BookVariant]!
+}
+
+input PublishedBookInput {
+    title: String
+    genre: Genre
+    id: Int
+    bookVariants: [BookVariantInput]!
 }
 
 enum Genre {
     SCIENCE_FICTION, HORROR, MYSTERY, ROMANCE, FANTASY
+}
+
+extend type Query {
+    getAllBooks: [PublishedBook]!
+    # getBooksWithPaging(page: Int, size: Int): Page<PublishedBook>
+    # findByKeywordContaining(keyword: String, page: Int, size: Int): Page<PublishedBook>
+    getBookById(id: Int): PublishedBook
+    # getBooksByAuthor(author: String): [PublishedBook]! Do not have this service
+
+}
+
+extend type Mutation {
+    createBook(book: PublishedBookInput): Int
+    deleteBookById(id: Int): Boolean
 }

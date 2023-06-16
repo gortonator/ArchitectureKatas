@@ -1,0 +1,32 @@
+type Checkout {
+    cartItems: [CartItem]
+    paymentType: PaymentType
+    shippingType: ShippingType
+    subtotal: Float
+    shippingFee: Float
+    numOfItems: Int
+    grandTotal: Float
+    deliverDays: Int
+    allEbook: Boolean
+}
+
+input CheckoutInput {
+    cartItems: [CartItemInput]
+    paymentType: PaymentType
+    shippingType: ShippingType
+    subtotal: Float
+    shippingFee: Float
+    numOfItems: Int
+    grandTotal: Float
+    deliverDays: Int
+    allEbook: Boolean
+}
+
+extend type Query {
+    getCheckout(cartItems: [CartItemInput]!): Checkout
+}
+
+extend type Mutation {
+   updateShippingType(checkout: CheckoutInput, shippingType: ShippingType): Boolean
+   updatePaymentType(checkout: CheckoutInput, paymentType: PaymentType): Boolean
+}

@@ -64,7 +64,7 @@ public class EditorialController {
     public ResponseEntity<DraftChapter> createDraftChapter(@PathVariable int draftBookId,
                                                            @RequestBody DraftChapterDTO draftChapterDTO) {
         String writerUsername = AuthUtil.getAuthenticatedUsername();
-        DraftChapter draftChapter = editorialService.createDraftChapter(draftChapterDTO, draftBookId, writerUsername);
+        DraftChapter draftChapter = editorialService.createDraftChapter(draftChapterDTO, draftBookId, "writer1");
         return new ResponseEntity<>(draftChapter, HttpStatus.CREATED);
     }
 

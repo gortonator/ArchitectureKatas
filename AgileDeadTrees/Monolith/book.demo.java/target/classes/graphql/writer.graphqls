@@ -1,0 +1,35 @@
+type Writer {
+    username: String
+    password: String
+    email: String
+    id: Int
+    author: Author
+    role: String
+}
+
+input  WriterInput{
+    username: String
+    password: String
+    email: String
+    id: Int
+    author: AuthorInput
+    role: String
+}
+
+type Author {
+    id: Int
+    firstName: String
+    lastName: String
+    publishedBooks: PublishedBook
+    draftBooks: DraftBook
+    fullName: String
+}
+
+input AuthorInput {
+    id: Int
+    firstName: String
+    lastName: String
+    publishedBooks: PublishedBookInput
+    draftBooks: DraftBookInput
+    fullName: String
+}

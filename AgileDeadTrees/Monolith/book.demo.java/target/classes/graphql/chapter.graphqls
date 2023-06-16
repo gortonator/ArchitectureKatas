@@ -1,0 +1,75 @@
+type AcceptedChapter {
+    chapterIndex: Int
+    title: String
+    content: String
+    draftBook: DraftBook
+    author: Author
+    id: Int
+}
+
+input AcceptedChapterInput {
+    chapterIndex: Int
+    title: String
+    content: String
+    draftBook: DraftBookInput
+    author: AuthorInput
+    id: Int
+}
+
+type DraftChapter {
+    chapterIndex: Int
+    title: String
+    content: String
+    draftBook: DraftBook
+    author: Author
+    id: Int
+    pendingContent: String
+    status:DraftChapterStatus
+    review: Review
+}
+
+input DraftChapterInput {
+    chapterIndex: Int
+    title: String
+    content: String
+    draftBook: DraftBookInput
+    author: AuthorInput
+    id: Int
+    pendingContent: String
+    status:DraftChapterStatus
+    review: ReviewInput
+}
+
+type DraftChapterDTO {
+    chapterIndex: Int
+    title: String
+    content: String
+}
+
+input DraftChapterDTOInput {
+    chapterIndex: Int
+    title: String
+    content: String
+}
+
+enum DraftChapterStatus {
+    CREATED, PENDING_APPROVAL_FROM_EDITOR, PENDING_APPROVAL_FROM_AUTHOR, ACCEPTED, REJECTED, PUBLISHED
+}
+
+extend type Query {
+    getCommentsByReviewId(reviewId: Int, byAsc: Boolean): [CommentDTO]!
+}
+
+extend type Mutation {
+   createDraftChapter(draftChapterDTO: DraftChapterDTOInput, draftBookId: Int, username: String): DraftChapter
+   editDraftChapterByAuthor(draftChapterId: Int, draftChapterDTO: DraftChapterDTOInput, username: String): DraftChapter
+   editDraftChapterByEditor(draftChapterId: Int, draftChapterDTO: DraftChapterDTOInput): DraftChapter
+   submitDraftChapter(draftChapterId: Int, writerUsername: String): DraftChapter
+   setPendingContentStatusByAuthor(draftChapterId: Int, isAccepted: Boolean, username: String): DraftChapter
+   createReview(draftChapterId: Int, editorUsername: String, content: String): Review
+   updateDraftChapterStatus(draftChapterId: Int, status: DraftChapterStatus): DraftChapter
+   publishDraftChapter(draftChapterId: Int): AcceptedChapter
+   createEditorComment(draftChapterId: Int, username: String, content: String): EditorComment
+   createWriterComment(draftChapterId: Int, username: String, content: String): WriterComment
+   publishDraftBook(draftBookId: Int): PublishedBook
+}

@@ -5,7 +5,7 @@ type User {
    username: String
    password: String
    email: String
-   roles: [Role]!
+   roles: [Role]
   
 }
 
@@ -16,7 +16,7 @@ input UserInput {
    username: String
    password: String
    email: String
-   roles: [RoleInput]!
+   roles: [RoleInput]
 }
 
 
@@ -55,5 +55,5 @@ type Query {
 
 
 type Mutation {
-   addRoleToUser(user: UserInput, role: RoleInput): User
+   addRoleToUser(userId: Int, roleId: Int): User
 }

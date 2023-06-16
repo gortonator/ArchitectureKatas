@@ -1,0 +1,59 @@
+type EditorComment {
+    content: String
+    review: Review
+    timestamp: String
+    id: Int
+    user: User
+    commenterType: CommenterType
+    commenterUsername: String
+}
+
+input EditorCommentInput {
+    content: String
+    review: ReviewInput
+    timestamp: String
+    id: Int
+    user: UserInput
+    commenterType: CommenterType
+    commenterUsername: String
+}
+
+type WriterComment {
+    content: String
+    review: Review
+    timestamp: String
+    id: Int
+    writer: Writer
+    commenterType: CommenterType
+    commenterUsername: String
+
+}
+
+input WriterCommentInput {
+    content: String
+    review: ReviewInput
+    timestamp: String
+    id: Int
+    writer: WriterInput
+    commenterType: CommenterType
+    commenterUsername: String
+
+}
+
+enum CommenterType {
+    WRITER, EDITOR
+}
+
+type CommentDTO {
+    content: String
+    commenterType: CommenterType
+    username: String
+    timestamp: String
+}
+
+input CommentDTOInput {
+    content: String
+    commenterType: CommenterType
+    username: String
+    timestamp: String
+}

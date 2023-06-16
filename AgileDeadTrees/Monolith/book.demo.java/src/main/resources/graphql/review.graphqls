@@ -1,0 +1,19 @@
+type Review {
+    id: Int
+    draftChapter: DraftChapter
+    editor: User
+    content: String
+    timestamp: String
+    editorComments: EditorComment
+    writerComments:  WriterComment
+}
+
+input ReviewInput {
+    id: Int
+    draftChapter: DraftChapterInput
+    editor: UserInput
+    content: String
+    timestamp: String
+    editorComments: EditorCommentInput
+    writerComments:  WriterCommentInput
+}
