@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 
 import book.demo.java.entity.cart.CartItem;
 import book.demo.java.service.CartItemService;
+import book.demo.java.util.AuthUtil;
 
 @Controller
 public class CartItemControllers {
@@ -28,7 +29,8 @@ public class CartItemControllers {
     }
 
     @MutationMapping
-    public CartItem addCartItem(@Argument Integer bookVariantId, @Argument Integer quantity, @Argument String username) {
+    public CartItem addCartItem(@Argument Integer bookVariantId, @Argument Integer quantity) {
+        String username = AuthUtil.getAuthenticatedUsername();
         return cartItemService.addCartItem(bookVariantId, quantity, username);
     }
 

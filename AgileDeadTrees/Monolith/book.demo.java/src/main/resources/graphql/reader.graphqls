@@ -24,7 +24,7 @@ input ReaderInput {
 
 extend type Query {
    getAllReaders: [Reader]!
-#    getReadersWithPaging(page: Int, size: Int): Reader
+   getReadersWithPaging(page: Int, size: Int): [Reader] # checkout whether is list or not
    getReaderById(id: Int): Reader
    findReaderByUsername(username: String): Reader
 

@@ -40,10 +40,9 @@ enum Genre {
 
 extend type Query {
     getAllBooks: [PublishedBook]!
-    # getBooksWithPaging(page: Int, size: Int): Page<PublishedBook>
-    # findByKeywordContaining(keyword: String, page: Int, size: Int): Page<PublishedBook>
+    getBooksWithPaging(page: Int, size: Int): [PublishedBook]
     getBookById(id: Int): PublishedBook
-    # getBooksByAuthor(author: String): [PublishedBook]! Do not have this service
+    getBooksByAuthorNameKeyword(keyword: String, page: Int, size: Int): [PublishedBook]!
 
 }
 

@@ -30,19 +30,16 @@ public class PublishedBookControllers {
    }
 
    @QueryMapping
-    public Page<PublishedBook> findByKeywordContaining(@Argument String keyword, @Argument Integer page, @Argument Integer size) {
-       return publishedBookService.findByKeywordContaining(keyword, page, size);
-   }
-
-   @QueryMapping
    public PublishedBook getBookById(@Argument Integer id) {
        return publishedBookService.getBookById(id);
    }
 
    @QueryMapping
-   public List<PublishedBook> getBooksByAuthor(@Argument String author) {
-       return publishedBookService.getBooksByAuthor(author);
-   }
+   public Page<PublishedBook> getBooksByAuthorNameKeyword(@Argument String keyword,
+                                                                           @Argument int page,
+                                                                           @Argument int size) {
+        return publishedBookService.findByKeywordContaining(keyword, page, size);
+    }
 
    @MutationMapping
    public Integer createBook(@Argument PublishedBook book) {
