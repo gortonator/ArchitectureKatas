@@ -8,10 +8,12 @@ public enum DraftChapterStatus {
     REJECTED(false, true),
     PUBLISHED(false, false);
 
-    // isEditableByEditor indicates whether the content of the draft chapter could be edited by an editor currently
+    // Indicates whether the content of the draft chapter could be edited by an editor currently.
+    // Only when the draftChapter is submitted by Writer for pending approval from an editor,
+    // then an editor could edit the content of the draft chapter.
     private final boolean isEditableByEditor;
 
-    // isApprovalStatus indicates whether this status is the final approval status from an editor
+    // Indicates whether this status is the final approval status (accepted or rejected) from an editor.
     private final boolean isApprovalStatus;
 
 
