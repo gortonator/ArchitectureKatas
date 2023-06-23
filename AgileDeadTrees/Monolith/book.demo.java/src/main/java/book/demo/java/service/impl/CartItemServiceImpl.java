@@ -56,7 +56,7 @@ public class CartItemServiceImpl implements CartItemService {
         return cartRepo.save(cartItem);
     }
 
-    public void removeByReaderIdAndBookVariantId(String username, int bookVariantId) {
-        cartRepo.deleteByReaderIdAndBookVariantId(username, bookVariantId);
+    public void removeByReaderUsernameAndBookVariantId(String username, int bookVariantId) {
+        cartRepo.deleteByReaderUsernameAndBookVariantId(username, bookVariantId);
     }
 }
