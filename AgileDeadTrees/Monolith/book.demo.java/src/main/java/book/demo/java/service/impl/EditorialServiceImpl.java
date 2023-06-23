@@ -215,6 +215,7 @@ public class EditorialServiceImpl implements EditorialService {
         DraftBook draftBook = findDraftBook(draftBookId);
         PublishedBook publishedBook = new PublishedBook(draftBook.getTitle(), draftBook.getGenre(),
                 draftBook.getAuthors());
+        // DraftBook Entity could be removed in database
         return publishedBookRepo.save(publishedBook);
     }
 
