@@ -56,16 +56,7 @@ public class DraftBook extends AbsBook implements Serializable {
 
     public DraftBook(String title, Genre genre, Set<Author> authors) {
         super(title, genre);
-        if (!authors.isEmpty()) {
-            addDraftBookToAuthors(authors);
-        }
-    }
-
-    private void addDraftBookToAuthors(Set<Author> authors) {
         this.authors = authors;
-        for (Author author : this.authors) {
-            author.addDraftBook(this);
-        }
     }
 
     @Override

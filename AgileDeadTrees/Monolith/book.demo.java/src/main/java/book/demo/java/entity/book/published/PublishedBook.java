@@ -49,6 +49,7 @@ public class PublishedBook extends AbsBook implements Serializable {
 
     public PublishedBook(String title, Genre genre, Set<Author> authors) {
         super(title, genre);
+        this.authors = authors;
     }
 
     @Override
