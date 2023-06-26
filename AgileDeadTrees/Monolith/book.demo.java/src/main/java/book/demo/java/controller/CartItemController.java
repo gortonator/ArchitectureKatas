@@ -95,7 +95,7 @@ public class CartItemController {
     @RequiresRoles(PredefinedRole.READER_ROLE)
     public ResponseEntity<HttpStatus> deleteBookInCart(@RequestParam("bookVariantId") int bookVariantId) {
         String username = AuthUtil.getAuthenticatedUsername();
-        cartService.removeByReaderIdAndBookVariantId(username, bookVariantId);
+        cartService.removeByReaderUsernameAndBookVariantId(username, bookVariantId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

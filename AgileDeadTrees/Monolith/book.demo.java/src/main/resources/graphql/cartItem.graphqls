@@ -24,6 +24,6 @@ extend type Query {
 }
 
 extend type Mutation {
-   addCartItem(bookVariantId: Int, quantity: Int): CartItem
-   removeByReaderIdAndBookVariantId(username: String, bookVariantId: Int): Boolean
+   addCartItems(bookVariantId: Int, quantity: Int): CartItem
+   removeByReaderIdAndBookVariantId(bookVariantId: Int): Boolean
 }

@@ -32,10 +32,10 @@ public class OrderControllers {
         return orderService.getOrder(orderId);
     }
 
-    // @MutationMapping
-    // public Order createOrder(@Argument Reader reader, @Argument Checkout checkout) {
-    //     return orderService.createOrder(reader,checkout);
-    // }
+    @MutationMapping
+    public Order createOrder(@Argument Reader reader, @Argument Checkout checkout) {
+        return orderService.createOrder(reader,checkout);
+    }
 
     @MutationMapping
     public Order setOrderStatus(@Argument Integer orderId, @Argument OrderStatus status) {

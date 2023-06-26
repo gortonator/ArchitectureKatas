@@ -37,7 +37,7 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     public CartItem addCartItem(int bookVariantId, int quantity, String username) {
-        CartItem cartItem = cartRepo.findByReaderIdAndBookVariantId(username, bookVariantId);
+        CartItem cartItem = cartRepo.findByReaderUsernameAndBookVariantId(username, bookVariantId);
         // If the book variant has been added to the reader's cart before, then update the quantity value
         if (cartItem != null) {
             cartItem.setQuantity(quantity);
@@ -55,7 +55,7 @@ public class CartItemServiceImpl implements CartItemService {
         return cartRepo.save(cartItem);
     }
 
-    public void removeByReaderIdAndBookVariantId(String username, int bookVariantId) {
-        cartRepo.deleteByReaderIdAndBookVariantId(username, bookVariantId);
+    public void removeByReaderUsernameAndBookVariantId(String username, int bookVariantId) {
+        cartRepo.removeByReaderUsernameAndBookVariantId(username, bookVariantId);
     }
 }

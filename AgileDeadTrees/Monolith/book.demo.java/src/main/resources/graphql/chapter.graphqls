@@ -61,15 +61,15 @@ extend type Query {
 }
 
 extend type Mutation {
-   createDraftChapter(draftChapterDTO: DraftChapterDTOInput, draftBookId: Int, username: String): DraftChapter
-   editDraftChapterByAuthor(draftChapterId: Int, draftChapterDTO: DraftChapterDTOInput, username: String): DraftChapter
+   createDraftChapter(draftChapterDTO: DraftChapterDTOInput, draftBookId: Int): DraftChapter
+   editDraftChapterByAuthor(draftChapterId: Int, draftChapterDTO: DraftChapterDTOInput): DraftChapter
    editDraftChapterByEditor(draftChapterId: Int, draftChapterDTO: DraftChapterDTOInput): DraftChapter
-   submitDraftChapter(draftChapterId: Int, writerUsername: String): DraftChapter
-   setPendingContentStatusByAuthor(draftChapterId: Int, isAccepted: Boolean, username: String): DraftChapter
-   createReview(draftChapterId: Int, editorUsername: String, content: String): Review
+   submitDraftChapter(draftChapterId: Int): DraftChapter
+   setPendingContentStatusByAuthor(draftChapterId: Int, isAccepted: Boolean): DraftChapter
+   createReview(draftChapterId: Int, content: String): Review
    updateDraftChapterStatus(draftChapterId: Int, status: DraftChapterStatus): DraftChapter
    publishDraftChapter(draftChapterId: Int): AcceptedChapter
-   createEditorComment(draftChapterId: Int, username: String, content: String): EditorComment
-   createWriterComment(draftChapterId: Int, username: String, content: String): WriterComment
+   createEditorComment(draftChapterId: Int, content: String): EditorComment
+   createWriterComment(draftChapterId: Int, content: String): WriterComment
    publishDraftBook(draftBookId: Int): PublishedBook
 }

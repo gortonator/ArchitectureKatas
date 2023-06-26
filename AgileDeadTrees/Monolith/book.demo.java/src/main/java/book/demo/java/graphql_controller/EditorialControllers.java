@@ -17,6 +17,7 @@ import book.demo.java.entity.book.editorial.Review;
 import book.demo.java.entity.book.editorial.WriterComment;
 import book.demo.java.entity.book.published.PublishedBook;
 import book.demo.java.service.EditorialService;
+import book.demo.java.util.AuthUtil;
 
 @Controller
 public class EditorialControllers {
@@ -32,13 +33,15 @@ public class EditorialControllers {
     }
 
     @MutationMapping
-    public DraftChapter createDraftChapter(@Argument DraftChapterDTO draftChapterDTO,@Argument Integer draftBookId,@Argument String username) {
-        return editorialService.createDraftChapter(draftChapterDTO, draftBookId, username);
+    public DraftChapter createDraftChapter(@Argument DraftChapterDTO draftChapterDTO,@Argument Integer draftBookId) {
+        String writerUsername = AuthUtil.getAuthenticatedUsername();
+        return editorialService.createDraftChapter(draftChapterDTO, draftBookId, writerUsername);
     }
 
     @MutationMapping
-    public DraftChapter editDraftChapterByAuthor(@Argument Integer draftChapterId,@Argument DraftChapterDTO draftChapterDTO,@Argument String username) {
-        return editorialService.editDraftChapterByAuthor(draftChapterId,draftChapterDTO, username);
+    public DraftChapter editDraftChapterByAuthor(@Argument Integer draftChapterId,@Argument DraftChapterDTO draftChapterDTO) {
+        String writerUsername = AuthUtil.getAuthenticatedUsername();
+        return editorialService.editDraftChapterByAuthor(draftChapterId,draftChapterDTO, writerUsername);
     }
 
     @MutationMapping
@@ -47,17 +50,20 @@ public class EditorialControllers {
     }
 
     @MutationMapping
-    public DraftChapter submitDraftChapter(@Argument Integer draftChapterId,@Argument String writerUsername) {
+    public DraftChapter submitDraftChapter(@Argument Integer draftChapterId) {
+        String writerUsername = AuthUtil.getAuthenticatedUsername();
         return editorialService.submitDraftChapter(draftChapterId,writerUsername);
     }
 
     @MutationMapping
-    public DraftChapter setPendingContentStatusByAuthor(@Argument Integer draftChapterId,@Argument Boolean isAccepted,@Argument String username) {
-        return editorialService.setPendingContentStatusByAuthor(draftChapterId,isAccepted, username);
+    public DraftChapter setPendingContentStatusByAuthor(@Argument Integer draftChapterId,@Argument Boolean isAccepted) {
+        String writerUsername = AuthUtil.getAuthenticatedUsername();
+        return editorialService.setPendingContentStatusByAuthor(draftChapterId,isAccepted, writerUsername);
     }
 
     @MutationMapping
-    public Review createReview(@Argument Integer draftChapterId,@Argument String editorUsername,@Argument String content) {
+    public Review createReview(@Argument Integer draftChapterId, @Argument String content) {
+        String editorUsername = AuthUtil.getAuthenticatedUsername();
         return editorialService.createReview(draftChapterId,editorUsername, content);
     }
 
@@ -72,13 +78,15 @@ public class EditorialControllers {
     }
 
     @MutationMapping
-    public EditorComment createEditorComment(@Argument Integer draftChapterId, @Argument String username, @Argument String content) {
-        return editorialService.createEditorComment(draftChapterId, username, content);
+    public EditorComment createEditorComment(@Argument Integer draftChapterId, @Argument String content) {
+        String editorUsername = AuthUtil.getAuthenticatedUsername();
+        return editorialService.createEditorComment(draftChapterId, editorUsername, content);
     }
 
     @MutationMapping
-    public WriterComment createWriterComment(@Argument Integer draftChapterId, @Argument String username, @Argument String content) {
-        return editorialService.createWriterComment(draftChapterId, username, content);
+    public WriterComment createWriterComment(@Argument Integer draftChapterId, @Argument String content) {
+        String writerUsername = AuthUtil.getAuthenticatedUsername();
+        return editorialService.createWriterComment(draftChapterId, writerUsername, content);
     }
 
     @MutationMapping

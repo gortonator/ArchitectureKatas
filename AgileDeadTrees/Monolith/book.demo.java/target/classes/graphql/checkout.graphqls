@@ -23,10 +23,11 @@ input CheckoutInput {
 }
 
 extend type Query {
-    getCheckout(cartItems: [CartItemInput]!): Checkout
+    getCheckout: Checkout
 }
 
 extend type Mutation {
-   updateShippingType(checkout: CheckoutInput, shippingType: ShippingType): Boolean
-   updatePaymentType(checkout: CheckoutInput, paymentType: PaymentType): Boolean
+   placeOrder: Order
+   updateShippingType(checkout: CheckoutInput, shippingType: ShippingType): Boolean 
+   updatePaymentType(checkout:CheckoutInput, paymentType: PaymentType): Boolean
 }

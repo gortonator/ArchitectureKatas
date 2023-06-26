@@ -49,17 +49,17 @@ public class PublishedBook extends AbsBook implements Serializable {
 
     public PublishedBook(String title, Genre genre, Set<Author> authors) {
         super(title, genre);
-        if (!authors.isEmpty()) {
-            addPublishedBookToAuthors(authors);
-        }
+        // if (!authors.isEmpty()) {
+        //     addPublishedBookToAuthors(authors);
+        // }
     }
 
-    private void addPublishedBookToAuthors(Set<Author> authors) {
-        this.authors = authors;
-        for (Author author : this.authors) {
-            author.addPublishedBook(this);
-        }
-    }
+    // private void addPublishedBookToAuthors(Set<Author> authors) {
+    //     this.authors = authors;
+    //     for (Author author : this.authors) {
+    //         author.addPublishedBook(this);
+    //     }
+    // }
 
     @Override
     public boolean equals(Object o) {

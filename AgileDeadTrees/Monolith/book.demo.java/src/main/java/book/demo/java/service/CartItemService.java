@@ -12,6 +12,6 @@ public interface CartItemService {
 
     CartItem addCartItem(int bookVariantId, int quantity, String username);
 
-    void removeByReaderIdAndBookVariantId(String username, int bookVariantId);
+    void removeByReaderUsernameAndBookVariantId(String username, int bookVariantId);
 
 }
